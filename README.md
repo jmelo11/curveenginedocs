@@ -1,2 +1,0 @@
-# curveenginedocs
-CurveEngine Docs
