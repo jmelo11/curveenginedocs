@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>curveengine.parsing.ratehelpers API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>curveengine.parsing.ratehelpers</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from curveengine.parsing.parsers import *
+from curveengine.parsing.others import *
+
+
+def createOISRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create an OIS rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.OISRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkOISRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    businessDayConvention = helperConfig[&#39;convention&#39;]
+
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    paymentLag = helperConfig[&#39;paymentLag&#39;]
+    fixedLegFrequency = helperConfig[&#39;fixedLegFrequency&#39;]
+    fwdStart = helperConfig[&#39;fwdStart&#39;]
+    index = indexes[helperConfig[&#39;index&#39;]]
+
+    rate = marketConfig[&#39;rate&#39;]
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    rate = ore.QuoteHandle(ore.SimpleQuote(rate))
+    helper = ore.OISRateHelper(settlementDays, tenor, rate, index, discountCurve, endOfMonth,
+                               paymentLag, businessDayConvention, fixedLegFrequency, calendar, fwdStart)
+    return helper
+
+
+def createDepositRateHelper(helperConfig: dict, marketConfig: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a deposit rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+        - tenor : str
+            The tenor of the helper
+        - calendar : str
+            The calendar
+        - convention : str
+            The business day convention
+        - settlementDays : int
+            The number of settlement days
+        - endOfMonth : bool
+            Whether the end of month rule is applied
+        - dayCounter : str
+            The day counter
+    marketConfig : dict
+        The market configuration for the helper
+        - rate : float
+            The rate
+
+    Returns
+    -------
+    ore.DepositRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkDepositRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    dayCounter = helperConfig[&#39;dayCounter&#39;]
+
+    rate = ore.QuoteHandle(ore.SimpleQuote(marketConfig[&#39;rate&#39;]))
+    helper = ore.DepositRateHelper(rate, tenor, settlementDays, calendar,
+                                   convention, endOfMonth, dayCounter)
+    return helper
+
+
+def createFixedRateBondRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a fixed rate bond helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+        - rate : float or ore.InterestRate
+            The rate
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.BondHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkFixedRateBondRateHelper
+    &#34;&#34;&#34;
+    calendar = helperConfig[&#39;calendar&#39;]
+    businessDayConvention = helperConfig[&#39;convention&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    couponDayCounter = helperConfig[&#39;couponDayCounter&#39;]
+    couponRate = helperConfig[&#39;couponRate&#39;]
+    frequency = helperConfig[&#39;frequency&#39;]
+
+    if &#39;tenor&#39; in helperConfig.keys():
+        tenor = helperConfig[&#39;tenor&#39;]
+        startDate = ore.Settings.instance().evaluationDate()
+        maturityDate = startDate + ore.Period(tenor)
+    else:
+        startDate = helperConfig[&#39;startDate&#39;]
+        maturityDate = helperConfig[&#39;endDate&#39;]
+
+    # Create a schedule
+    schedule = ore.Schedule(
+        startDate,
+        maturityDate,
+        ore.Period(frequency),
+        calendar,
+        businessDayConvention,
+        businessDayConvention,
+        ore.DateGeneration.Backward,
+        False
+    )
+
+    rate = marketConfig[&#39;rate&#39;]
+    if isinstance(rate, float):
+        rateDayCounter = ore.Actual365Fixed()
+        rateCompounding = ore.Compounded
+        rateFrequency = ore.Annual
+    elif isinstance(rate, ore.InterestRate):
+        rateDayCounter = rate.dayCounter()
+        rateCompounding = rate.compounding()
+        rateFrequency = rate.frequency()
+    else:
+        raise Exception(&#39;rate is not a float or an InterestRate&#39;)
+
+    # Create a fixed rate bond
+    fixedRateBond = ore.FixedRateBond(
+        settlementDays,
+        100,
+        schedule,
+        [couponRate],
+        couponDayCounter,
+    )
+
+    # Calculate the clean price
+    cleanPrice = fixedRateBond.cleanPrice(
+        rate,
+        rateDayCounter,
+        rateCompounding,
+        rateFrequency)
+
+    # Bond helper
+    bondHelper = ore.BondHelper(
+        ore.QuoteHandle(ore.SimpleQuote(cleanPrice)),
+        fixedRateBond
+    )
+
+    return bondHelper
+
+
+def createSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper      
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.SwapRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkSwapRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    fixedLegFrequency = helperConfig[&#39;fixedLegFrequency&#39;]
+    dayCounter = helperConfig[&#39;dayCounter&#39;]
+    fwdStart = helperConfig[&#39;fwdStart&#39;]
+
+    # QuoteHandle
+    rate = marketConfig[&#39;rate&#39;]
+    spread = marketConfig[&#39;spread&#39;]
+    rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # Index
+    index = indexes[helperConfig[&#39;index&#39;]]
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # Swap rate helper
+    swapRateHelper = ore.SwapRateHelper(
+        rateQuote, tenor, calendar, fixedLegFrequency, convention, dayCounter, index, spreadQuote, fwdStart, discountCurve
+    )
+    return swapRateHelper
+
+
+def createFxSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a fx swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.FxSwapRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkFxSwapRateHelper
+    &#34;&#34;&#34;
+    fxPoints = marketConfig[&#39;fxPoints&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;]
+
+    fixingDays = helperConfig[&#39;fixingDays&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    baseCurrencyAsCollateral = helperConfig[&#39;baseCurrencyAsCollateral&#39;]
+
+    if &#39;tenor&#39; in helperConfig.keys():
+        tenor = helperConfig[&#39;tenor&#39;]
+    else:
+        startDate = ore.Settings.instance().evaluationDate
+        maturityDate = helperConfig[&#39;endDate&#39;]
+        days = maturityDate - startDate
+        tenor = ore.Period(days, ore.Days)
+
+    # QuoteHandle
+    fwdPointQuote = ore.QuoteHandle(ore.SimpleQuote(fxPoints))
+    spotFxQuote = ore.QuoteHandle(ore.SimpleQuote(spotFx))
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # FxSwapRateHelper
+    fxSwapRateHelper = ore.FxSwapRateHelper(
+        fwdPointQuote,
+        spotFxQuote,
+        tenor,
+        fixingDays,
+        calendar,
+        convention,
+        endOfMonth,
+        baseCurrencyAsCollateral,
+        discountCurve,
+        calendar
+    )
+    return fxSwapRateHelper
+
+
+def createSofrFutureRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a sofr future rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.SofrFutureRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    TODO: checkSofrFutureRateHelper
+    &#34;&#34;&#34;
+    month = helperConfig[&#39;month&#39;]
+    year = helperConfig[&#39;year&#39;]
+    frequency = helperConfig[&#39;frequency&#39;]
+    # QuoteHandle
+    price = marketConfig[&#39;price&#39;]
+    convexity = marketConfig[&#39;convexity&#39;]
+    priceQuote = ore.QuoteHandle(ore.SimpleQuote(price))
+    convexityQuote = ore.QuoteHandle(ore.SimpleQuote(convexity))
+
+    # SofrFutureRateHelper
+    sofrFutureRateHelper = ore.SofrFutureRateHelper(
+        priceQuote,
+        month,
+        year,
+        frequency,
+        convexityQuote
+    )
+    return sofrFutureRateHelper
+
+
+def createTenorBasisSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a tenor basis swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.TenorBasisSwapHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkTenorBasisRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    spreadOnShort = helperConfig[&#39;spreadOnShort&#39;]
+
+    # Index
+    longIndex = indexes[helperConfig[&#39;longIndex&#39;]]
+    shortIndex = indexes[helperConfig[&#39;shortIndex&#39;]]
+
+    # QuoteHandle
+    spread = marketConfig[&#39;spread&#39;]
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # TenorBasisSwapHelper
+    tenorBasisSwapHelper = ore.TenorBasisSwapHelper(
+        spreadQuote,
+        tenor,
+        longIndex,
+        shortIndex,
+        ore.Period(),
+        discountCurve,
+        spreadOnShort,
+        True
+    )
+
+    return tenorBasisSwapHelper
+
+
+def createCrossCcyFixFloatSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a cross currency fix float swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper        
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.CrossCcyFixFloatSwapHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkCrossCcyFixFloatSwapRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    dayCounter = helperConfig[&#39;dayCounter&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    fixedLegFrequency = helperConfig[&#39;fixedLegFrequency&#39;]
+    fixedLegCurrency = helperConfig[&#39;fixedLegCurrency&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+
+    # QuoteHandle
+    rate = marketConfig[&#39;rate&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;]
+    spread = marketConfig[&#39;spread&#39;]
+
+    rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
+    spotFxQuote = ore.QuoteHandle(ore.SimpleQuote(spotFx))
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # Index
+    index = indexes[helperConfig[&#39;index&#39;]]
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # CrossCcyFixFloatSwapHelper
+    crossCcyFixFloatSwapHelper = ore.CrossCcyFixFloatSwapHelper(
+        rateQuote,
+        spotFxQuote,
+        settlementDays,
+        calendar,
+        convention,
+        tenor,
+        fixedLegCurrency,
+        fixedLegFrequency,
+        convention,
+        dayCounter,
+        index,
+        discountCurve,
+        spreadQuote,
+        endOfMonth
+    )
+    return crossCcyFixFloatSwapHelper
+
+
+def createCrossCcyBasisSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a cross currency basis swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+        - spread : float
+            The spread
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.CrossCcyBasisSwapHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkCrossCcyBasisSwapRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+
+    # Discout curves
+    flatDiscountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+    spreadDiscountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # Index
+    flatIndex = indexes[helperConfig[&#39;flatIndex&#39;]]
+    spreadIndex = indexes[helperConfig[&#39;spreadIndex&#39;]]
+
+    # QuoteHandle
+    spread = marketConfig[&#39;spread&#39;]
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # CrossCcyBasisSwapHelper
+    crossCcyBasisSwapHelper = ore.CrossCcyBasisSwapHelper(
+        spreadQuote,
+        tenor,
+        calendar,
+        settlementDays,
+        flatIndex,
+        spreadIndex,
+        flatDiscountCurve,
+        spreadDiscountCurve,
+        endOfMonth,
+        convention
+    )
+    return crossCcyBasisSwapHelper</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="curveengine.parsing.ratehelpers.createCrossCcyBasisSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">createCrossCcyBasisSwapRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a cross currency basis swap rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper
+- spread : float
+The spread</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.CrossCcyBasisSwapHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkCrossCcyBasisSwapRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createCrossCcyBasisSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a cross currency basis swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+        - spread : float
+            The spread
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.CrossCcyBasisSwapHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkCrossCcyBasisSwapRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+
+    # Discout curves
+    flatDiscountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+    spreadDiscountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # Index
+    flatIndex = indexes[helperConfig[&#39;flatIndex&#39;]]
+    spreadIndex = indexes[helperConfig[&#39;spreadIndex&#39;]]
+
+    # QuoteHandle
+    spread = marketConfig[&#39;spread&#39;]
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # CrossCcyBasisSwapHelper
+    crossCcyBasisSwapHelper = ore.CrossCcyBasisSwapHelper(
+        spreadQuote,
+        tenor,
+        calendar,
+        settlementDays,
+        flatIndex,
+        spreadIndex,
+        flatDiscountCurve,
+        spreadDiscountCurve,
+        endOfMonth,
+        convention
+    )
+    return crossCcyBasisSwapHelper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createCrossCcyFixFloatSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">createCrossCcyFixFloatSwapRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a cross currency fix float swap rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.CrossCcyFixFloatSwapHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkCrossCcyFixFloatSwapRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createCrossCcyFixFloatSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a cross currency fix float swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper        
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.CrossCcyFixFloatSwapHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkCrossCcyFixFloatSwapRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    dayCounter = helperConfig[&#39;dayCounter&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    fixedLegFrequency = helperConfig[&#39;fixedLegFrequency&#39;]
+    fixedLegCurrency = helperConfig[&#39;fixedLegCurrency&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+
+    # QuoteHandle
+    rate = marketConfig[&#39;rate&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;]
+    spread = marketConfig[&#39;spread&#39;]
+
+    rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
+    spotFxQuote = ore.QuoteHandle(ore.SimpleQuote(spotFx))
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # Index
+    index = indexes[helperConfig[&#39;index&#39;]]
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # CrossCcyFixFloatSwapHelper
+    crossCcyFixFloatSwapHelper = ore.CrossCcyFixFloatSwapHelper(
+        rateQuote,
+        spotFxQuote,
+        settlementDays,
+        calendar,
+        convention,
+        tenor,
+        fixedLegCurrency,
+        fixedLegFrequency,
+        convention,
+        dayCounter,
+        index,
+        discountCurve,
+        spreadQuote,
+        endOfMonth
+    )
+    return crossCcyFixFloatSwapHelper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createDepositRateHelper"><code class="name flex">
+<span>def <span class="ident">createDepositRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a deposit rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper
+- tenor : str
+The tenor of the helper
+- calendar : str
+The calendar
+- convention : str
+The business day convention
+- settlementDays : int
+The number of settlement days
+- endOfMonth : bool
+Whether the end of month rule is applied
+- dayCounter : str
+The day counter</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper
+- rate : float
+The rate</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.DepositRateHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkDepositRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createDepositRateHelper(helperConfig: dict, marketConfig: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a deposit rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+        - tenor : str
+            The tenor of the helper
+        - calendar : str
+            The calendar
+        - convention : str
+            The business day convention
+        - settlementDays : int
+            The number of settlement days
+        - endOfMonth : bool
+            Whether the end of month rule is applied
+        - dayCounter : str
+            The day counter
+    marketConfig : dict
+        The market configuration for the helper
+        - rate : float
+            The rate
+
+    Returns
+    -------
+    ore.DepositRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkDepositRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    dayCounter = helperConfig[&#39;dayCounter&#39;]
+
+    rate = ore.QuoteHandle(ore.SimpleQuote(marketConfig[&#39;rate&#39;]))
+    helper = ore.DepositRateHelper(rate, tenor, settlementDays, calendar,
+                                   convention, endOfMonth, dayCounter)
+    return helper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createFixedRateBondRateHelper"><code class="name flex">
+<span>def <span class="ident">createFixedRateBondRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a fixed rate bond helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper
+- rate : float or ore.InterestRate
+The rate</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.BondHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkFixedRateBondRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createFixedRateBondRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a fixed rate bond helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+        - rate : float or ore.InterestRate
+            The rate
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.BondHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkFixedRateBondRateHelper
+    &#34;&#34;&#34;
+    calendar = helperConfig[&#39;calendar&#39;]
+    businessDayConvention = helperConfig[&#39;convention&#39;]
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    couponDayCounter = helperConfig[&#39;couponDayCounter&#39;]
+    couponRate = helperConfig[&#39;couponRate&#39;]
+    frequency = helperConfig[&#39;frequency&#39;]
+
+    if &#39;tenor&#39; in helperConfig.keys():
+        tenor = helperConfig[&#39;tenor&#39;]
+        startDate = ore.Settings.instance().evaluationDate()
+        maturityDate = startDate + ore.Period(tenor)
+    else:
+        startDate = helperConfig[&#39;startDate&#39;]
+        maturityDate = helperConfig[&#39;endDate&#39;]
+
+    # Create a schedule
+    schedule = ore.Schedule(
+        startDate,
+        maturityDate,
+        ore.Period(frequency),
+        calendar,
+        businessDayConvention,
+        businessDayConvention,
+        ore.DateGeneration.Backward,
+        False
+    )
+
+    rate = marketConfig[&#39;rate&#39;]
+    if isinstance(rate, float):
+        rateDayCounter = ore.Actual365Fixed()
+        rateCompounding = ore.Compounded
+        rateFrequency = ore.Annual
+    elif isinstance(rate, ore.InterestRate):
+        rateDayCounter = rate.dayCounter()
+        rateCompounding = rate.compounding()
+        rateFrequency = rate.frequency()
+    else:
+        raise Exception(&#39;rate is not a float or an InterestRate&#39;)
+
+    # Create a fixed rate bond
+    fixedRateBond = ore.FixedRateBond(
+        settlementDays,
+        100,
+        schedule,
+        [couponRate],
+        couponDayCounter,
+    )
+
+    # Calculate the clean price
+    cleanPrice = fixedRateBond.cleanPrice(
+        rate,
+        rateDayCounter,
+        rateCompounding,
+        rateFrequency)
+
+    # Bond helper
+    bondHelper = ore.BondHelper(
+        ore.QuoteHandle(ore.SimpleQuote(cleanPrice)),
+        fixedRateBond
+    )
+
+    return bondHelper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createFxSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">createFxSwapRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a fx swap rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.FxSwapRateHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkFxSwapRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createFxSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a fx swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.FxSwapRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkFxSwapRateHelper
+    &#34;&#34;&#34;
+    fxPoints = marketConfig[&#39;fxPoints&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;]
+
+    fixingDays = helperConfig[&#39;fixingDays&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    baseCurrencyAsCollateral = helperConfig[&#39;baseCurrencyAsCollateral&#39;]
+
+    if &#39;tenor&#39; in helperConfig.keys():
+        tenor = helperConfig[&#39;tenor&#39;]
+    else:
+        startDate = ore.Settings.instance().evaluationDate
+        maturityDate = helperConfig[&#39;endDate&#39;]
+        days = maturityDate - startDate
+        tenor = ore.Period(days, ore.Days)
+
+    # QuoteHandle
+    fwdPointQuote = ore.QuoteHandle(ore.SimpleQuote(fxPoints))
+    spotFxQuote = ore.QuoteHandle(ore.SimpleQuote(spotFx))
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # FxSwapRateHelper
+    fxSwapRateHelper = ore.FxSwapRateHelper(
+        fwdPointQuote,
+        spotFxQuote,
+        tenor,
+        fixingDays,
+        calendar,
+        convention,
+        endOfMonth,
+        baseCurrencyAsCollateral,
+        discountCurve,
+        calendar
+    )
+    return fxSwapRateHelper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createOISRateHelper"><code class="name flex">
+<span>def <span class="ident">createOISRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create an OIS rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.OISRateHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkOISRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createOISRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create an OIS rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.OISRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkOISRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    businessDayConvention = helperConfig[&#39;convention&#39;]
+
+    settlementDays = helperConfig[&#39;settlementDays&#39;]
+    endOfMonth = helperConfig[&#39;endOfMonth&#39;]
+    paymentLag = helperConfig[&#39;paymentLag&#39;]
+    fixedLegFrequency = helperConfig[&#39;fixedLegFrequency&#39;]
+    fwdStart = helperConfig[&#39;fwdStart&#39;]
+    index = indexes[helperConfig[&#39;index&#39;]]
+
+    rate = marketConfig[&#39;rate&#39;]
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    rate = ore.QuoteHandle(ore.SimpleQuote(rate))
+    helper = ore.OISRateHelper(settlementDays, tenor, rate, index, discountCurve, endOfMonth,
+                               paymentLag, businessDayConvention, fixedLegFrequency, calendar, fwdStart)
+    return helper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createSofrFutureRateHelper"><code class="name flex">
+<span>def <span class="ident">createSofrFutureRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a sofr future rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.SofrFutureRateHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<dl>
+<dt><code>TODO</code></dt>
+<dd>checkSofrFutureRateHelper</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createSofrFutureRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a sofr future rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.SofrFutureRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    TODO: checkSofrFutureRateHelper
+    &#34;&#34;&#34;
+    month = helperConfig[&#39;month&#39;]
+    year = helperConfig[&#39;year&#39;]
+    frequency = helperConfig[&#39;frequency&#39;]
+    # QuoteHandle
+    price = marketConfig[&#39;price&#39;]
+    convexity = marketConfig[&#39;convexity&#39;]
+    priceQuote = ore.QuoteHandle(ore.SimpleQuote(price))
+    convexityQuote = ore.QuoteHandle(ore.SimpleQuote(convexity))
+
+    # SofrFutureRateHelper
+    sofrFutureRateHelper = ore.SofrFutureRateHelper(
+        priceQuote,
+        month,
+        year,
+        frequency,
+        convexityQuote
+    )
+    return sofrFutureRateHelper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">createSwapRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a swap rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.SwapRateHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkSwapRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper      
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.SwapRateHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkSwapRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    calendar = helperConfig[&#39;calendar&#39;]
+    convention = helperConfig[&#39;convention&#39;]
+    fixedLegFrequency = helperConfig[&#39;fixedLegFrequency&#39;]
+    dayCounter = helperConfig[&#39;dayCounter&#39;]
+    fwdStart = helperConfig[&#39;fwdStart&#39;]
+
+    # QuoteHandle
+    rate = marketConfig[&#39;rate&#39;]
+    spread = marketConfig[&#39;spread&#39;]
+    rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # Index
+    index = indexes[helperConfig[&#39;index&#39;]]
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # Swap rate helper
+    swapRateHelper = ore.SwapRateHelper(
+        rateQuote, tenor, calendar, fixedLegFrequency, convention, dayCounter, index, spreadQuote, fwdStart, discountCurve
+    )
+    return swapRateHelper</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.ratehelpers.createTenorBasisSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">createTenorBasisSwapRateHelper</span></span>(<span>helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a tenor basis swap rate helper</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration for the helper</dd>
+<dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market configuration for the helper</dd>
+<dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curves</dd>
+<dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The indexes</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ore.TenorBasisSwapHelper</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="see-also">See Also</h2>
+<p><code>checkTenorBasisRateHelper</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createTenorBasisSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
+    &#34;&#34;&#34;
+    Create a tenor basis swap rate helper
+
+    Parameters
+    ----------
+    helperConfig : dict
+        The configuration for the helper
+
+    marketConfig : dict
+        The market configuration for the helper
+
+    curves : dict
+        The curves
+    indexes : dict
+        The indexes
+
+    Returns
+    -------
+    ore.TenorBasisSwapHelper
+        The rate helper
+
+    See Also
+    ----------
+    checkTenorBasisRateHelper
+    &#34;&#34;&#34;
+    tenor = helperConfig[&#39;tenor&#39;]
+    spreadOnShort = helperConfig[&#39;spreadOnShort&#39;]
+
+    # Index
+    longIndex = indexes[helperConfig[&#39;longIndex&#39;]]
+    shortIndex = indexes[helperConfig[&#39;shortIndex&#39;]]
+
+    # QuoteHandle
+    spread = marketConfig[&#39;spread&#39;]
+    spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
+
+    # Discounting curve
+    discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
+
+    # TenorBasisSwapHelper
+    tenorBasisSwapHelper = ore.TenorBasisSwapHelper(
+        spreadQuote,
+        tenor,
+        longIndex,
+        shortIndex,
+        ore.Period(),
+        discountCurve,
+        spreadOnShort,
+        True
+    )
+
+    return tenorBasisSwapHelper</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="curveengine.parsing" href="index.html">curveengine.parsing</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="curveengine.parsing.ratehelpers.createCrossCcyBasisSwapRateHelper" href="#curveengine.parsing.ratehelpers.createCrossCcyBasisSwapRateHelper">createCrossCcyBasisSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createCrossCcyFixFloatSwapRateHelper" href="#curveengine.parsing.ratehelpers.createCrossCcyFixFloatSwapRateHelper">createCrossCcyFixFloatSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createDepositRateHelper" href="#curveengine.parsing.ratehelpers.createDepositRateHelper">createDepositRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createFixedRateBondRateHelper" href="#curveengine.parsing.ratehelpers.createFixedRateBondRateHelper">createFixedRateBondRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createFxSwapRateHelper" href="#curveengine.parsing.ratehelpers.createFxSwapRateHelper">createFxSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createOISRateHelper" href="#curveengine.parsing.ratehelpers.createOISRateHelper">createOISRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createSofrFutureRateHelper" href="#curveengine.parsing.ratehelpers.createSofrFutureRateHelper">createSofrFutureRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createSwapRateHelper" href="#curveengine.parsing.ratehelpers.createSwapRateHelper">createSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.ratehelpers.createTenorBasisSwapRateHelper" href="#curveengine.parsing.ratehelpers.createTenorBasisSwapRateHelper">createTenorBasisSwapRateHelper</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

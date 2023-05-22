@@ -1,0 +1,3670 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>curveengine.parsing.checks API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>curveengine.parsing.checks</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import re
+from functools import partial
+from curveengine.parsing.enums import *
+
+&#39;&#39;&#39;
+Example of a basic structure of the curve request:
+{
+    &#34;refDate&#34;: &#34;2020-01-01&#34;,
+    &#34;curves&#34;: [
+        {
+            &#34;curveName&#34;: &#34;PiecewiseCurveExample&#34;,
+            &#34;curveConfig&#34;: {
+                &#34;curveType&#34;: &#34;Piecewise&#34;,                
+                &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                &#34;enableExtrapolation&#34;: True,
+                &#34;rateHelpers&#34;: [
+                    {                        
+                        &#34;helperConfig&#34;: {
+                            ...
+                        },
+                        &#34;marketConfig&#34;: {
+                            ...
+                        },
+                    }
+                ]
+            },
+            &#34;curveIndex&#34;:{
+                ...
+            }
+        },
+        {
+            &#34;curveName&#34;: &#34;DiscountCurveExample&#34;,
+            &#34;curveConfig&#34;: {
+                &#34;curveType&#34;: &#34;Discount&#34;,
+                &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                &#34;enableExtrapolation&#34;: True,
+                &#34;nodes&#34;: [
+                    {
+                        &#34;date&#34;: &#34;2020-01-01&#34;,
+                        &#34;discount&#34;: 0.01
+                    },
+                    {
+                        &#34;date&#34;: &#34;2020-02-01&#34;,
+                        &#34;discount&#34;: 0.02
+                    }
+                ]
+            },
+            &#34;curveIndex&#34;:{
+                ...
+            }
+        }
+    ]
+}
+&#39;&#39;&#39;
+
+
+class ConfigurationError(Exception):
+    &#39;&#39;&#39;
+    Exception raised when the request is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message
+
+
+class RateIndexError(ConfigurationError):
+    &#39;&#39;&#39;
+    Exception raised when the index is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message
+
+
+class RateHelperConfigurationError(ConfigurationError):
+    &#39;&#39;&#39;
+    Exception raised when the rate helper is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message
+
+
+class MarketConfigurationError(ConfigurationError):
+    &#39;&#39;&#39;
+    Exception raised when the market configuration is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message
+
+
+## Check available enums and possible instances#
+
+
+def checkDate(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the date is valid
+
+    Parameters
+    ----------
+    value: str
+        The date
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the date is invalid
+    &#39;&#39;&#39;
+    if not re.match(r&#39;^\d{4}-\d{2}-\d{2}$&#39;, value):
+        raise ValueError(f&#39;{value} is not a valid date&#39;)
+
+
+def checkIsInEnum(value: str, enum: list) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the value is in the enum
+
+    Parameters
+    ----------
+    value: str
+        The value to check
+    enum: list
+        The enum
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the value is not in the enum
+    &#39;&#39;&#39;
+    if value not in enum:
+        raise ValueError(f&#39;{value} is not in {enum}&#39;)
+
+
+def checkDayCounter(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the day counter is valid
+
+    Parameters
+    ----------
+    value: str
+        The day counter. It must match the DayCounter enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the day counter is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    DayCounter
+
+    &#39;&#39;&#39;
+    checkIsInEnum(value, DayCounter.__members__)
+
+
+def checkFrequency(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the frequency is valid
+
+    Parameters
+    ----------
+    value: str
+        The frequency, matching the Frequency enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the frequency is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Frequency
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Frequency.__members__)
+
+
+def checkCompounding(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the compounding is valid
+
+    Parameters
+    ----------
+    value: str
+        The compounding, matching the Compounding enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the compounding is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Compounding
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Compounding.__members__)
+
+
+def checkConvention(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the convention is valid
+
+    Parameters
+    ----------
+    value: str
+        The convention, matching the Convention enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the convention is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Convention
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Convention.__members__)
+
+
+def checkCalendar(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the calendar is valid
+
+    Parameters
+    ----------
+    value: str
+        The calendar, matching the Calendar enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the calendar is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Calendar
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Calendar.__members__)
+
+
+def checkCurrency(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the currency is valid
+
+    Parameters
+    ----------
+    value: str
+        The currency, matching the Currency enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the currency is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Currency
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Currency.__members__)
+
+
+def checkDateGenerationRule(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the date generation rule is valid
+
+    Parameters
+    ----------
+    value: str
+        The date generation rule, matching the DateGenerationRule enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the date generation rule is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    DateGenerationRule
+    &#39;&#39;&#39;
+    checkIsInEnum(value, DateGenerationRule.__members__)
+
+
+def checkTenor(tenor: str) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the tenor is valid
+
+    Parameters
+    ----------
+    tenor: str
+        The tenor, it can be a number followed by D, W, M or Y
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the tenor is invalid
+    &#39;&#39;&#39;
+    regex = r&#39;^(\d+[DWMY])+$&#39;
+    if not re.match(regex, tenor):
+        raise ValueError(f&#39;The tenor {tenor} is invalid&#39;)
+
+
+def checkDictStructure(input: dict, reference: dict) -&gt; None:
+    for key in reference.keys():
+        if key not in input.keys():
+            raise KeyError(
+                f&#39;The required key &#34;{key}&#34; is missing.&#39;)
+    for key in input.keys():
+        if key in reference.keys():
+            reference[key](input[key])
+
+
+def checkInstance(value: any, type: type) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the value is an instance of the type
+
+    Parameters
+    ----------
+    value: any
+        The value to check
+    type: type
+        The type to check
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the value is not an instance of the type
+    &#39;&#39;&#39;
+
+    if not isinstance(value, type):
+        raise ValueError(f&#39;The value {value} is not an instance of {type}.&#39;)
+
+
+## Rate helpers checks ##
+
+def checkOISRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the OIS rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The OIS rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The OIS rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                        &#34;tenor&#34;: &#34;1W&#34;,
+                        &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                        &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                        &#34;convention&#34;: &#34;Following&#34;,
+                        &#34;endOfMonth&#34;: True,
+                        &#34;frequency&#34;: &#34;Annual&#34;,
+                        &#34;settlementDays&#34;: 2,
+                        &#34;paymentLag&#34;: 2,
+                        &#34;telescopicValueDates&#34;: True,
+                        &#34;index&#34;: &#34;SOFR&#34;,
+                        &#34;fixedLegFrequency&#34;: &#34;Semiannual&#34;,
+                        &#34;fwdStart&#34;: &#34;0D&#34;
+                    }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;convention&#34;: checkConvention,
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;frequency&#34;: checkFrequency,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;paymentLag&#34;: partial(checkInstance, type=int),
+        &#34;telescopicValueDates&#34;: partial(checkInstance, type=bool),
+        &#34;index&#34;: partial(checkInstance, type=str),
+        &#34;fixedLegFrequency&#34;: checkFrequency,
+        &#34;fwdStart&#34;: checkTenor
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(&#39;Invalid OIS rate helper&#39;) from exc
+
+
+def checkDepositRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the deposit rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The deposit rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The deposit rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                    &#34;tenor&#34;: &#34;1D&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;settlementDays&#34;: 0,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;convention&#34;: &#34;Unadjusted&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+    reference = {
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;tenor&#34;: checkTenor,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid deposit rate helper&#39;) from exc
+
+
+def checkSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the swap rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The swap rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The swap rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;tenor&#34;: &#34;2Y&#34;,
+                    &#34;dayCounter&#34;: &#34;Thirty360&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;frequency&#34;: &#34;Semiannual&#34;,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;discountCurve&#34;: &#34;SOFR&#34;,
+                    &#34;index&#34;: &#34;LIBOR3M&#34;,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;convention&#34;: &#34;Unadjusted&#34;,
+                    &#34;fixedLegFrequency&#34;: &#34;Semiannual&#34;,
+                    &#34;fwdStart&#34;: &#34;0D&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;frequency&#34;: checkFrequency,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;index&#34;: partial(checkInstance, type=str),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention,
+        &#34;fixedLegFrequency&#34;: checkFrequency,
+        &#34;fwdStart&#34;: checkTenor
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(&#39;Invalid swap rate helper&#39;) from exc
+
+
+def checkFixedRateBondRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the bond rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The bond rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The bond rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;convention&#34;: &#34;Following&#34;,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;couponDayCounter&#34;: &#34;Actual360&#34;,
+                    &#34;couponRate&#34;: 0.05,
+                    &#34;frequency&#34;: &#34;Annual&#34;,
+                    &#34;startDate&#34;: &#34;2020-01-01&#34;,
+                    &#34;endDate&#34;: &#34;2022-01-01&#34;,
+                    &#34;tenor&#34;: &#34;2Y&#34; # needed if start date and end date are not provided
+                }
+    ```
+    &#39;&#39;&#39;
+    reference = {
+        &#34;calendar&#34;: checkCalendar,
+        &#34;convention&#34;: checkConvention,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;couponDayCounter&#34;: checkDayCounter,
+        &#34;couponRate&#34;: partial(checkInstance, type=float),
+        &#34;frequency&#34;: checkFrequency,
+    }
+
+    # check if the start date and end date are provided
+    if &#34;startDate&#34; in data or &#34;endDate&#34; in data:
+        reference[&#34;startDate&#34;] = checkDate
+        reference[&#34;endDate&#34;] = checkDate
+    else:
+        reference[&#34;tenor&#34;] = checkTenor
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(&#39;Invalid bond rate helper&#39;) from exc
+
+
+def checkFxSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the FX swap rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The FX swap rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The FX swap rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                        &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                        &#34;fixingDays&#34;: 0,
+                        &#34;endOfMonth&#34;: False,
+                        &#34;baseCurrencyAsCollateral&#34;: False,
+                        &#34;convention&#34;: &#34;Following&#34;,
+                        &#34;discountCurve&#34;: &#34;CLP_COLLUSD&#34;,                       
+                        &#34;endDate&#34;: &#34;2023-04-09&#34;,
+                        &#34;tenor&#34;: &#34;1Y&#34;, # need if no end date is provided
+                        &#34;settlementDays&#34;: 0
+                    }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;calendar&#34;: checkCalendar,
+        &#34;fixingDays&#34;: partial(checkInstance, type=int),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;baseCurrencyAsCollateral&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention,
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;settlementDays&#34;: partial(checkInstance, type=int)
+    }
+
+    # check if the end date is provided
+    if &#34;endDate&#34; in data:
+        reference[&#34;endDate&#34;] = checkDate
+    else:
+        reference[&#34;tenor&#34;] = checkTenor
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid FX swap rate helper&#39;) from exc
+
+
+def checkCrossCcyFixFloatSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the cross currency rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The cross currency rate helper
+
+    Returns
+    -------
+    None
+        no return, raise RateHelperConfigurationError if the request is invalid
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The cross currency rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;:  {
+                    &#34;tenor&#34;: &#34;2Y&#34;,
+                    &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;convention&#34;: &#34;ModifiedFollowing&#34;,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;discountCurve&#34;: &#34;CLP_COLLUSD&#34;,
+                    &#34;index&#34;: &#34;ICP&#34;,
+                    &#34;fixedLegCurrency&#34;: &#34;CLF&#34;,
+                    &#34;fwdStart&#34;: &#34;0D&#34;,
+                    &#34;fixedLegFrequency&#34;: &#34;Semiannual&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;convention&#34;: checkConvention,
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;index&#34;: partial(checkInstance, type=str),
+        &#34;fixedLegCurrency&#34;: partial(checkInstance, type=str),
+        &#34;fwdStart&#34;: checkTenor,
+        &#34;fixedLegFrequency&#34;: checkFrequency
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid cross currency rate helper&#39;) from exc
+
+
+def checkTenorBasisSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the tenor basis rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The tenor basis rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The tenor basis rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;tenor&#34;: &#34;3M&#34;,
+                    &#34;longIndex&#34;: &#34;LIBOR3M&#34;,
+                    &#34;shortIndex&#34;: &#34;LIBOR1M&#34;,
+                    &#34;discountCurve&#34;: &#34;SOFR&#34;,
+                    &#34;spreadOnShort&#34;: True
+                }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;longIndex&#34;: partial(checkInstance, type=str),
+        &#34;shortIndex&#34;: partial(checkInstance, type=str),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;spreadOnShort&#34;: partial(checkInstance, type=bool)
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid tenor basis rate helper&#39;) from exc
+
+
+def checkCrossCcyBasisSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the cross currency basis rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The cross currency basis rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The cross currency basis rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;tenor&#34;: &#34;3M&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;convention&#34;: &#34;ModifiedFollowing&#34;,
+                    &#34;flatIndex&#34;: &#34;LIBOR3M&#34;,
+                    &#34;spreadIndex&#34;: &#34;LIBOR1M&#34;,
+                    &#34;discountCurve&#34;: &#34;SOFR&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention,
+        &#34;flatIndex&#34;: partial(checkInstance, type=str),
+        &#34;spreadIndex&#34;: partial(checkInstance, type=str),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid cross currency basis rate helper&#39;) from exc
+
+
+def checkMarketConfig(data: dict, helperType: HelperType) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the market config is valid
+
+    Parameters
+    ----------
+    data: dict
+        The market config
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the market config is invalid
+
+    Details
+    -------
+    The market config should have the following example structure:
+    ```
+    &#34;marketConfig&#34;: {
+                        &#34;rate&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        },
+                        &#34;spread&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        },
+                        &#34;fxSpot&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        },
+                        &#34;fxPoints&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        }
+                    }
+    ```
+
+    Where each field has at least a value. The ticker is optional.    
+    Each field is dependent on the helper type. The following table shows the required fields for each helper type:
+
+    |Helper type             | Required fields                  |
+    |----------------------- | ---------------------------------|
+    |Deposit                 | rate                             |
+    |Swap                    | rate, spread                     |    
+    |FxSwap                  | fxSpot, fxPoints                 |    
+    |Xccy                    | rate, spread, fxSpot, fxPoints   |
+    |TenorBasis              | spread                           |
+    |XccyBasis               | spread, fxSpot, fxPoints         |
+    |OIS                     | spread                           |
+    |Bond                    | rate                             |
+    &#39;&#39;&#39;
+
+    def checkPrice(data: dict) -&gt; None:
+        if not isinstance(data, dict):
+            raise ConfigurationError(
+                &#39;Invalid price, should be a dictionary&#39;)
+        if &#39;value&#39; not in data:
+            raise ConfigurationError(
+                &#39;Invalid price, missing value&#39;)
+        if not isinstance(data[&#39;value&#39;], float):
+            raise ConfigurationError(
+                &#39;Invalid price, value should be a float&#39;)
+        if &#39;ticker&#39; in data and not isinstance(data[&#39;ticker&#39;], str):
+            raise ConfigurationError(
+                &#39;Invalid price, ticker should be a string&#39;)
+
+    reference = {}
+    if helperType == HelperType.Deposit:
+        reference = {
+            &#34;rate&#34;: checkPrice
+        }
+    elif helperType == HelperType.Swap:
+        reference = {
+            &#34;rate&#34;: checkPrice,
+            &#34;spread&#34;: checkPrice
+        }
+    elif helperType == HelperType.FxSwap:
+        reference = {
+            &#34;fxSpot&#34;: checkPrice,
+            &#34;fxPoints&#34;: checkPrice
+        }
+    elif helperType == HelperType.Xccy:
+        reference = {
+            &#34;rate&#34;: checkPrice,
+            &#34;spread&#34;: checkPrice,
+            &#34;fxSpot&#34;: checkPrice,
+            &#34;fxPoints&#34;: checkPrice
+        }
+    elif helperType == HelperType.TenorBasis:
+        reference = {
+            &#34;spread&#34;: checkPrice
+        }
+    elif helperType == HelperType.XccyBasis:
+        reference = {
+            &#34;spread&#34;: checkPrice,
+            &#34;fxSpot&#34;: checkPrice,
+            &#34;fxPoints&#34;: checkPrice
+        }
+    elif helperType == HelperType.OIS:
+        reference = {
+            &#34;spread&#34;: checkPrice
+        }
+    elif helperType == HelperType.Bond:
+        reference = {
+            &#34;rate&#34;: checkPrice
+        }
+    else:
+        raise ConfigurationError(&#39;Invalid helper type&#39;)
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid market config&#39;) from exc
+
+
+def checkRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The rate helper should have the following example structure:
+    ```
+    &#34;rateHelper&#34;: {
+                        &#34;helperType&#34;: &#34;OIS&#34;,
+                        &#34;helperConfig&#34;: {
+                           ...
+                        },
+                        &#34;marketConfig&#34;: {
+                            ...
+                        }
+                    }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;helperType&#34;: partial(checkIsInEnum, enum=[r.value for r in HelperType]),
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid rate helper configuration or helper type&#39;) from exc
+
+    helperType = HelperType[data[&#39;helperType&#39;]]
+
+    reference[&#34;marketConfig&#34;] = partial(
+        checkMarketConfig, helperType=helperType)
+    if helperType == HelperType.Deposit:
+        reference[&#34;helperConfig&#34;] = checkDepositRateHelper
+    elif helperType == HelperType.Swap:
+        reference[&#34;helperConfig&#34;] = checkSwapRateHelper
+    elif helperType == HelperType.FxSwap:
+        reference[&#34;helperConfig&#34;] = checkFxSwapRateHelper
+    elif helperType == HelperType.Xccy:
+        reference[&#34;helperConfig&#34;] = checkCrossCcyFixFloatSwapRateHelper
+    elif helperType == HelperType.TenorBasis:
+        reference[&#34;helperConfig&#34;] = checkTenorBasisSwapRateHelper
+    elif helperType == HelperType.XccyBasis:
+        reference[&#34;helperConfig&#34;] = checkCrossCcyBasisSwapRateHelper
+    elif helperType == HelperType.OIS:
+        reference[&#34;helperConfig&#34;] = checkOISRateHelper
+    elif helperType == HelperType.Bond:
+        reference[&#34;helperConfig&#34;] = checkFixedRateBondRateHelper
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(&#39;Invalid rate helper configuration&#39;) from exc
+
+
+## Index checks ##
+
+
+def checkIndex(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the index is valid
+
+    Parameters
+    ----------
+    data: dict
+        The index
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateIndexError
+        If the index is invalid
+
+    Details
+    -------
+    The index should have the following example structure:
+    ```
+    &#34;curveIndex&#34;: {
+                &#34;indexType&#34;: &#34;IborIndex&#34;,
+                &#34;tenor&#34;: &#34;6M&#34;,
+                &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                &#34;currency&#34;: &#34;CLP&#34;,
+                &#34;fixingDays&#34;: 0,
+                &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                &#34;endOfMonth&#34;: False,
+                &#34;convention&#34;: &#34;Unadjusted&#34;
+            }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;indexType&#34;: partial(checkIsInEnum, enum=IndexType.__members__),
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;currency&#34;: checkCurrency,
+        &#34;fixingDays&#34;: partial(checkInstance, type=int),
+        &#34;calendar&#34;: checkCalendar,
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateIndexError(&#39;Invalid index configuration&#39;) from exc
+
+
+## Curve checks ##
+
+def checkPiecewiseCurve(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the piecewise curve is valid
+
+    Parameters
+    ----------
+    data: dict
+        The piecewise curve
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    InvalidCurve
+        If the curve is invalid
+
+    Details
+    -------
+    The piecewise curve should have the following example structure:
+
+    ```
+    &#34;example&#34;: {
+            &#34;curveType&#34;: &#34;Piecewise&#34;,
+            &#34;dayCounter&#34;: &#34;Actual360&#34;,
+            &#34;enableExtrapolation&#34;: True,
+            &#34;rateHelpers&#34;: [
+                ...
+            ]
+        }
+    ```
+    &#39;&#39;&#39;
+    def checkRateHelperList(l: list) -&gt; None:
+        checkInstance(l, type=list)
+        if len(l) == 0:
+            raise ConfigurationError(
+                &#39;Invalid piecewise curve configuration, rateHelpers should not be empty&#39;)
+        for helper in l:
+            checkRateHelper(helper)
+
+    reference = {
+        &#34;curveType&#34;: partial(checkIsInEnum, enum=[r.value for r in CurveType]),
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;enableExtrapolation&#34;: partial(checkInstance, type=bool),
+        &#34;rateHelpers&#34;: checkRateHelperList
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid piecewise curve configuration&#39;) from exc
+
+
+def checkDiscountCurve(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the discount curve is valid
+
+    Parameters
+    ----------
+    data: dict
+        The discount curve
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    InvalidCurve
+        If the curve is invalid
+
+    Details
+    -------
+    The discount curve should have the following example structure:
+
+    ```
+    &#34;example&#34;: {
+            &#34;curveType&#34;: &#34;Discount&#34;,
+            &#34;dayCounter&#34;: &#34;Actual360&#34;,
+            &#34;enableExtrapolation&#34;: True,
+            &#34;nodes&#34;: [
+                {
+                    &#34;date&#34;: &#34;2020-01-01&#34;,
+                    &#34;value&#34;: 0.99
+                }
+            ]
+        }
+    ```
+    &#39;&#39;&#39;
+    def checkNodeList(l: list) -&gt; None:
+        ref = {
+            &#34;date&#34;: checkDate,
+            &#34;value&#34;: partial(checkInstance, type=float)
+        }
+        checkInstance(l, type=list)
+        if len(l) == 0:
+            raise ConfigurationError(
+                &#39;Invalid discount curve configuration, discountFactors should not be empty&#39;)
+        for node in l:
+            checkDictStructure(node, ref)
+
+    reference = {
+        &#34;curveType&#34;: partial(checkIsInEnum, enum=[r.value for r in CurveType]),
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;enableExtrapolation&#34;: partial(checkInstance, type=bool),
+        &#34;nodes&#34;: checkNodeList
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid discount curve configuration&#39;) from exc
+
+
+def checkCurve(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the curve is valid
+
+    Parameters
+    ----------
+    data: dict
+        The curve
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the curve is invalid
+
+    Details
+    -------
+    The curve should have the following example structure:
+
+    ```
+    &#34;curve&#34;: {
+        &#34;curveName&#34;: &#34;CLP&#34;,
+        &#34;curveConfig&#34;: {
+            &#34;curveType&#34;: &#34;Piecewise&#34;,
+            &#34;dayCounter&#34;: &#34;Actual360&#34;,
+            &#34;enableExtrapolation&#34;: True,
+            &#34;rateHelpers&#34;: []   # if curveType is Piecewise, otherwise nodes             
+
+        },
+        &#34;curveIndex&#34;: {}
+    }
+    ```
+    &#39;&#39;&#39;
+    def checkBaseCurve(dict: dict) -&gt; None:
+        if &#34;curveType&#34; not in dict:
+            raise ConfigurationError(
+                &#39;Invalid curve configuration, curveType should be defined&#39;)
+        if dict[&#34;curveType&#34;] == CurveType.Piecewise.value:
+            checkPiecewiseCurve(dict)
+        elif dict[&#34;curveType&#34;] == CurveType.Discount.value:
+            checkDiscountCurve(dict)
+        else:
+            raise ConfigurationError(
+                &#39;Invalid curve configuration, curveType should be Piecewise or Discount&#39;)
+
+    reference = {
+        &#34;curveName&#34;: partial(checkInstance, type=str),
+        &#34;curveConfig&#34;: checkBaseCurve,
+        &#34;curveIndex&#34;: checkIndex
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid curve configuration&#39;) from exc
+
+
+def checkConfiguration(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the configuration is valid
+
+    Parameters
+    ----------
+    data: dict
+        The configuration
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the configuration is invalid
+
+    Details
+    -------
+    The configuration should have the following example structure:
+
+    ```
+    &#34;configuration&#34;: {
+        &#34;refDate&#34;: &#34;2020-01-01&#34;,
+        &#34;curves&#34;: [
+                {
+                    &#34;curveName&#34;: &#34;CLP&#34;,
+                    &#34;curveConfig&#34;: {
+                        &#34;curveType&#34;: &#34;Piecewise&#34;,
+                        &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                        &#34;enableExtrapolation&#34;: True,
+                        &#34;rateHelpers&#34;: [
+                            ...
+                            ]
+                        },
+                    &#34;curveIndex&#34;: {
+                        ...
+                    }
+                }
+            ]
+        }        
+    }
+    ```
+    &#39;&#39;&#39;
+
+    def checkCurveList(l: list) -&gt; None:
+        reference = {
+            &#34;curveName&#34;: partial(checkInstance, type=str),
+            &#34;curveConfig&#34;: checkCurve,
+            &#34;curveIndex&#34;: checkIndex
+        }
+        checkInstance(l, type=list)
+        if len(l) == 0:
+            raise ConfigurationError(
+                &#39;Invalid configuration, curves should not be empty&#39;)
+        for curve in l:
+            checkDictStructure(curve, reference)
+
+    reference = {
+        &#34;refDate&#34;: checkDate,
+        &#34;curves&#34;: checkCurveList
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(&#39;Invalid configuration&#39;) from exc</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="curveengine.parsing.checks.checkCalendar"><code class="name flex">
+<span>def <span class="ident">checkCalendar</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the calendar is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The calendar, matching the Calendar enum.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the calendar is invalid</dd>
+</dl>
+<h2 id="also-see">Also See</h2>
+<p>checkIsInEnum
+Calendar</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkCalendar(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the calendar is valid
+
+    Parameters
+    ----------
+    value: str
+        The calendar, matching the Calendar enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the calendar is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Calendar
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Calendar.__members__)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkCompounding"><code class="name flex">
+<span>def <span class="ident">checkCompounding</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the compounding is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The compounding, matching the Compounding enum.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the compounding is invalid</dd>
+</dl>
+<h2 id="also-see">Also See</h2>
+<p>checkIsInEnum
+Compounding</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkCompounding(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the compounding is valid
+
+    Parameters
+    ----------
+    value: str
+        The compounding, matching the Compounding enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the compounding is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Compounding
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Compounding.__members__)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkConfiguration"><code class="name flex">
+<span>def <span class="ident">checkConfiguration</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the configuration is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The configuration</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></code></dt>
+<dd>If the configuration is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The configuration should have the following example structure:</p>
+<pre><code>&quot;configuration&quot;: {
+    &quot;refDate&quot;: &quot;2020-01-01&quot;,
+    &quot;curves&quot;: [
+            {
+                &quot;curveName&quot;: &quot;CLP&quot;,
+                &quot;curveConfig&quot;: {
+                    &quot;curveType&quot;: &quot;Piecewise&quot;,
+                    &quot;dayCounter&quot;: &quot;Actual360&quot;,
+                    &quot;enableExtrapolation&quot;: True,
+                    &quot;rateHelpers&quot;: [
+                        ...
+                        ]
+                    },
+                &quot;curveIndex&quot;: {
+                    ...
+                }
+            }
+        ]
+    }        
+}
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkConfiguration(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the configuration is valid
+
+    Parameters
+    ----------
+    data: dict
+        The configuration
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the configuration is invalid
+
+    Details
+    -------
+    The configuration should have the following example structure:
+
+    ```
+    &#34;configuration&#34;: {
+        &#34;refDate&#34;: &#34;2020-01-01&#34;,
+        &#34;curves&#34;: [
+                {
+                    &#34;curveName&#34;: &#34;CLP&#34;,
+                    &#34;curveConfig&#34;: {
+                        &#34;curveType&#34;: &#34;Piecewise&#34;,
+                        &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                        &#34;enableExtrapolation&#34;: True,
+                        &#34;rateHelpers&#34;: [
+                            ...
+                            ]
+                        },
+                    &#34;curveIndex&#34;: {
+                        ...
+                    }
+                }
+            ]
+        }        
+    }
+    ```
+    &#39;&#39;&#39;
+
+    def checkCurveList(l: list) -&gt; None:
+        reference = {
+            &#34;curveName&#34;: partial(checkInstance, type=str),
+            &#34;curveConfig&#34;: checkCurve,
+            &#34;curveIndex&#34;: checkIndex
+        }
+        checkInstance(l, type=list)
+        if len(l) == 0:
+            raise ConfigurationError(
+                &#39;Invalid configuration, curves should not be empty&#39;)
+        for curve in l:
+            checkDictStructure(curve, reference)
+
+    reference = {
+        &#34;refDate&#34;: checkDate,
+        &#34;curves&#34;: checkCurveList
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(&#39;Invalid configuration&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkConvention"><code class="name flex">
+<span>def <span class="ident">checkConvention</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the convention is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The convention, matching the Convention enum.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the convention is invalid</dd>
+</dl>
+<h2 id="also-see">Also See</h2>
+<p>checkIsInEnum
+Convention</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkConvention(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the convention is valid
+
+    Parameters
+    ----------
+    value: str
+        The convention, matching the Convention enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the convention is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Convention
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Convention.__members__)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkCrossCcyBasisSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">checkCrossCcyBasisSwapRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the cross currency basis rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The cross currency basis rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The cross currency basis rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;: {
+                &quot;tenor&quot;: &quot;3M&quot;,
+                &quot;calendar&quot;: &quot;NullCalendar&quot;,
+                &quot;settlementDays&quot;: 2,
+                &quot;endOfMonth&quot;: False,
+                &quot;convention&quot;: &quot;ModifiedFollowing&quot;,
+                &quot;flatIndex&quot;: &quot;LIBOR3M&quot;,
+                &quot;spreadIndex&quot;: &quot;LIBOR1M&quot;,
+                &quot;discountCurve&quot;: &quot;SOFR&quot;
+            }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkCrossCcyBasisSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the cross currency basis rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The cross currency basis rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The cross currency basis rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;tenor&#34;: &#34;3M&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;convention&#34;: &#34;ModifiedFollowing&#34;,
+                    &#34;flatIndex&#34;: &#34;LIBOR3M&#34;,
+                    &#34;spreadIndex&#34;: &#34;LIBOR1M&#34;,
+                    &#34;discountCurve&#34;: &#34;SOFR&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention,
+        &#34;flatIndex&#34;: partial(checkInstance, type=str),
+        &#34;spreadIndex&#34;: partial(checkInstance, type=str),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid cross currency basis rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkCrossCcyFixFloatSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">checkCrossCcyFixFloatSwapRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the cross currency rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The cross currency rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>no return, raise RateHelperConfigurationError if the request is invalid</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The cross currency rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;:  {
+                &quot;tenor&quot;: &quot;2Y&quot;,
+                &quot;dayCounter&quot;: &quot;Actual360&quot;,
+                &quot;calendar&quot;: &quot;NullCalendar&quot;,
+                &quot;convention&quot;: &quot;ModifiedFollowing&quot;,
+                &quot;endOfMonth&quot;: False,
+                &quot;settlementDays&quot;: 2,
+                &quot;discountCurve&quot;: &quot;CLP_COLLUSD&quot;,
+                &quot;index&quot;: &quot;ICP&quot;,
+                &quot;fixedLegCurrency&quot;: &quot;CLF&quot;,
+                &quot;fwdStart&quot;: &quot;0D&quot;,
+                &quot;fixedLegFrequency&quot;: &quot;Semiannual&quot;
+            }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkCrossCcyFixFloatSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the cross currency rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The cross currency rate helper
+
+    Returns
+    -------
+    None
+        no return, raise RateHelperConfigurationError if the request is invalid
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The cross currency rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;:  {
+                    &#34;tenor&#34;: &#34;2Y&#34;,
+                    &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;convention&#34;: &#34;ModifiedFollowing&#34;,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;discountCurve&#34;: &#34;CLP_COLLUSD&#34;,
+                    &#34;index&#34;: &#34;ICP&#34;,
+                    &#34;fixedLegCurrency&#34;: &#34;CLF&#34;,
+                    &#34;fwdStart&#34;: &#34;0D&#34;,
+                    &#34;fixedLegFrequency&#34;: &#34;Semiannual&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;convention&#34;: checkConvention,
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;index&#34;: partial(checkInstance, type=str),
+        &#34;fixedLegCurrency&#34;: partial(checkInstance, type=str),
+        &#34;fwdStart&#34;: checkTenor,
+        &#34;fixedLegFrequency&#34;: checkFrequency
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid cross currency rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkCurrency"><code class="name flex">
+<span>def <span class="ident">checkCurrency</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the currency is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The currency, matching the Currency enum.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the currency is invalid</dd>
+</dl>
+<h2 id="also-see">Also See</h2>
+<p>checkIsInEnum
+Currency</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkCurrency(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the currency is valid
+
+    Parameters
+    ----------
+    value: str
+        The currency, matching the Currency enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the currency is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Currency
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Currency.__members__)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkCurve"><code class="name flex">
+<span>def <span class="ident">checkCurve</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the curve is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The curve</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></code></dt>
+<dd>If the curve is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The curve should have the following example structure:</p>
+<pre><code>&quot;curve&quot;: {
+    &quot;curveName&quot;: &quot;CLP&quot;,
+    &quot;curveConfig&quot;: {
+        &quot;curveType&quot;: &quot;Piecewise&quot;,
+        &quot;dayCounter&quot;: &quot;Actual360&quot;,
+        &quot;enableExtrapolation&quot;: True,
+        &quot;rateHelpers&quot;: []   # if curveType is Piecewise, otherwise nodes             
+
+    },
+    &quot;curveIndex&quot;: {}
+}
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkCurve(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the curve is valid
+
+    Parameters
+    ----------
+    data: dict
+        The curve
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the curve is invalid
+
+    Details
+    -------
+    The curve should have the following example structure:
+
+    ```
+    &#34;curve&#34;: {
+        &#34;curveName&#34;: &#34;CLP&#34;,
+        &#34;curveConfig&#34;: {
+            &#34;curveType&#34;: &#34;Piecewise&#34;,
+            &#34;dayCounter&#34;: &#34;Actual360&#34;,
+            &#34;enableExtrapolation&#34;: True,
+            &#34;rateHelpers&#34;: []   # if curveType is Piecewise, otherwise nodes             
+
+        },
+        &#34;curveIndex&#34;: {}
+    }
+    ```
+    &#39;&#39;&#39;
+    def checkBaseCurve(dict: dict) -&gt; None:
+        if &#34;curveType&#34; not in dict:
+            raise ConfigurationError(
+                &#39;Invalid curve configuration, curveType should be defined&#39;)
+        if dict[&#34;curveType&#34;] == CurveType.Piecewise.value:
+            checkPiecewiseCurve(dict)
+        elif dict[&#34;curveType&#34;] == CurveType.Discount.value:
+            checkDiscountCurve(dict)
+        else:
+            raise ConfigurationError(
+                &#39;Invalid curve configuration, curveType should be Piecewise or Discount&#39;)
+
+    reference = {
+        &#34;curveName&#34;: partial(checkInstance, type=str),
+        &#34;curveConfig&#34;: checkBaseCurve,
+        &#34;curveIndex&#34;: checkIndex
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid curve configuration&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkDate"><code class="name flex">
+<span>def <span class="ident">checkDate</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the date is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The date</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the date is invalid</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkDate(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the date is valid
+
+    Parameters
+    ----------
+    value: str
+        The date
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the date is invalid
+    &#39;&#39;&#39;
+    if not re.match(r&#39;^\d{4}-\d{2}-\d{2}$&#39;, value):
+        raise ValueError(f&#39;{value} is not a valid date&#39;)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkDateGenerationRule"><code class="name flex">
+<span>def <span class="ident">checkDateGenerationRule</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the date generation rule is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The date generation rule, matching the DateGenerationRule enum.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the date generation rule is invalid</dd>
+</dl>
+<h2 id="also-see">Also See</h2>
+<p>checkIsInEnum
+DateGenerationRule</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkDateGenerationRule(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the date generation rule is valid
+
+    Parameters
+    ----------
+    value: str
+        The date generation rule, matching the DateGenerationRule enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the date generation rule is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    DateGenerationRule
+    &#39;&#39;&#39;
+    checkIsInEnum(value, DateGenerationRule.__members__)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkDayCounter"><code class="name flex">
+<span>def <span class="ident">checkDayCounter</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the day counter is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The day counter. It must match the DayCounter enum.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the day counter is invalid</dd>
+</dl>
+<h2 id="also-see">Also See</h2>
+<p>checkIsInEnum
+DayCounter</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkDayCounter(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the day counter is valid
+
+    Parameters
+    ----------
+    value: str
+        The day counter. It must match the DayCounter enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the day counter is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    DayCounter
+
+    &#39;&#39;&#39;
+    checkIsInEnum(value, DayCounter.__members__)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkDepositRateHelper"><code class="name flex">
+<span>def <span class="ident">checkDepositRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the deposit rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The deposit rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The deposit rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;: {
+                &quot;dayCounter&quot;: &quot;Actual360&quot;,
+                &quot;tenor&quot;: &quot;1D&quot;,
+                &quot;calendar&quot;: &quot;NullCalendar&quot;,
+                &quot;settlementDays&quot;: 0,
+                &quot;endOfMonth&quot;: False,
+                &quot;convention&quot;: &quot;Unadjusted&quot;
+            }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkDepositRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the deposit rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The deposit rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The deposit rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                    &#34;tenor&#34;: &#34;1D&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;settlementDays&#34;: 0,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;convention&#34;: &#34;Unadjusted&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+    reference = {
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;tenor&#34;: checkTenor,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid deposit rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkDictStructure"><code class="name flex">
+<span>def <span class="ident">checkDictStructure</span></span>(<span>input: dict, reference: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkDictStructure(input: dict, reference: dict) -&gt; None:
+    for key in reference.keys():
+        if key not in input.keys():
+            raise KeyError(
+                f&#39;The required key &#34;{key}&#34; is missing.&#39;)
+    for key in input.keys():
+        if key in reference.keys():
+            reference[key](input[key])</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkDiscountCurve"><code class="name flex">
+<span>def <span class="ident">checkDiscountCurve</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the discount curve is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The discount curve</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>InvalidCurve</code></dt>
+<dd>If the curve is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The discount curve should have the following example structure:</p>
+<pre><code>&quot;example&quot;: {
+        &quot;curveType&quot;: &quot;Discount&quot;,
+        &quot;dayCounter&quot;: &quot;Actual360&quot;,
+        &quot;enableExtrapolation&quot;: True,
+        &quot;nodes&quot;: [
+            {
+                &quot;date&quot;: &quot;2020-01-01&quot;,
+                &quot;value&quot;: 0.99
+            }
+        ]
+    }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkDiscountCurve(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the discount curve is valid
+
+    Parameters
+    ----------
+    data: dict
+        The discount curve
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    InvalidCurve
+        If the curve is invalid
+
+    Details
+    -------
+    The discount curve should have the following example structure:
+
+    ```
+    &#34;example&#34;: {
+            &#34;curveType&#34;: &#34;Discount&#34;,
+            &#34;dayCounter&#34;: &#34;Actual360&#34;,
+            &#34;enableExtrapolation&#34;: True,
+            &#34;nodes&#34;: [
+                {
+                    &#34;date&#34;: &#34;2020-01-01&#34;,
+                    &#34;value&#34;: 0.99
+                }
+            ]
+        }
+    ```
+    &#39;&#39;&#39;
+    def checkNodeList(l: list) -&gt; None:
+        ref = {
+            &#34;date&#34;: checkDate,
+            &#34;value&#34;: partial(checkInstance, type=float)
+        }
+        checkInstance(l, type=list)
+        if len(l) == 0:
+            raise ConfigurationError(
+                &#39;Invalid discount curve configuration, discountFactors should not be empty&#39;)
+        for node in l:
+            checkDictStructure(node, ref)
+
+    reference = {
+        &#34;curveType&#34;: partial(checkIsInEnum, enum=[r.value for r in CurveType]),
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;enableExtrapolation&#34;: partial(checkInstance, type=bool),
+        &#34;nodes&#34;: checkNodeList
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid discount curve configuration&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkFixedRateBondRateHelper"><code class="name flex">
+<span>def <span class="ident">checkFixedRateBondRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the bond rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The bond rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The bond rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;: {
+                &quot;calendar&quot;: &quot;NullCalendar&quot;,
+                &quot;convention&quot;: &quot;Following&quot;,
+                &quot;settlementDays&quot;: 2,
+                &quot;couponDayCounter&quot;: &quot;Actual360&quot;,
+                &quot;couponRate&quot;: 0.05,
+                &quot;frequency&quot;: &quot;Annual&quot;,
+                &quot;startDate&quot;: &quot;2020-01-01&quot;,
+                &quot;endDate&quot;: &quot;2022-01-01&quot;,
+                &quot;tenor&quot;: &quot;2Y&quot; # needed if start date and end date are not provided
+            }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkFixedRateBondRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the bond rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The bond rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The bond rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;convention&#34;: &#34;Following&#34;,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;couponDayCounter&#34;: &#34;Actual360&#34;,
+                    &#34;couponRate&#34;: 0.05,
+                    &#34;frequency&#34;: &#34;Annual&#34;,
+                    &#34;startDate&#34;: &#34;2020-01-01&#34;,
+                    &#34;endDate&#34;: &#34;2022-01-01&#34;,
+                    &#34;tenor&#34;: &#34;2Y&#34; # needed if start date and end date are not provided
+                }
+    ```
+    &#39;&#39;&#39;
+    reference = {
+        &#34;calendar&#34;: checkCalendar,
+        &#34;convention&#34;: checkConvention,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;couponDayCounter&#34;: checkDayCounter,
+        &#34;couponRate&#34;: partial(checkInstance, type=float),
+        &#34;frequency&#34;: checkFrequency,
+    }
+
+    # check if the start date and end date are provided
+    if &#34;startDate&#34; in data or &#34;endDate&#34; in data:
+        reference[&#34;startDate&#34;] = checkDate
+        reference[&#34;endDate&#34;] = checkDate
+    else:
+        reference[&#34;tenor&#34;] = checkTenor
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(&#39;Invalid bond rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkFrequency"><code class="name flex">
+<span>def <span class="ident">checkFrequency</span></span>(<span>value) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the frequency is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The frequency, matching the Frequency enum.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the frequency is invalid</dd>
+</dl>
+<h2 id="also-see">Also See</h2>
+<p>checkIsInEnum
+Frequency</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkFrequency(value) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the frequency is valid
+
+    Parameters
+    ----------
+    value: str
+        The frequency, matching the Frequency enum.
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the frequency is invalid
+
+    Also see
+    --------
+    checkIsInEnum
+    Frequency
+    &#39;&#39;&#39;
+    checkIsInEnum(value, Frequency.__members__)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkFxSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">checkFxSwapRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the FX swap rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The FX swap rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The FX swap rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;: {
+                    &quot;calendar&quot;: &quot;NullCalendar&quot;,
+                    &quot;fixingDays&quot;: 0,
+                    &quot;endOfMonth&quot;: False,
+                    &quot;baseCurrencyAsCollateral&quot;: False,
+                    &quot;convention&quot;: &quot;Following&quot;,
+                    &quot;discountCurve&quot;: &quot;CLP_COLLUSD&quot;,                       
+                    &quot;endDate&quot;: &quot;2023-04-09&quot;,
+                    &quot;tenor&quot;: &quot;1Y&quot;, # need if no end date is provided
+                    &quot;settlementDays&quot;: 0
+                }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkFxSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the FX swap rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The FX swap rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The FX swap rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                        &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                        &#34;fixingDays&#34;: 0,
+                        &#34;endOfMonth&#34;: False,
+                        &#34;baseCurrencyAsCollateral&#34;: False,
+                        &#34;convention&#34;: &#34;Following&#34;,
+                        &#34;discountCurve&#34;: &#34;CLP_COLLUSD&#34;,                       
+                        &#34;endDate&#34;: &#34;2023-04-09&#34;,
+                        &#34;tenor&#34;: &#34;1Y&#34;, # need if no end date is provided
+                        &#34;settlementDays&#34;: 0
+                    }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;calendar&#34;: checkCalendar,
+        &#34;fixingDays&#34;: partial(checkInstance, type=int),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;baseCurrencyAsCollateral&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention,
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;settlementDays&#34;: partial(checkInstance, type=int)
+    }
+
+    # check if the end date is provided
+    if &#34;endDate&#34; in data:
+        reference[&#34;endDate&#34;] = checkDate
+    else:
+        reference[&#34;tenor&#34;] = checkTenor
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid FX swap rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkIndex"><code class="name flex">
+<span>def <span class="ident">checkIndex</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the index is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The index</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateIndexError" href="#curveengine.parsing.checks.RateIndexError">RateIndexError</a></code></dt>
+<dd>If the index is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The index should have the following example structure:</p>
+<pre><code>&quot;curveIndex&quot;: {
+            &quot;indexType&quot;: &quot;IborIndex&quot;,
+            &quot;tenor&quot;: &quot;6M&quot;,
+            &quot;dayCounter&quot;: &quot;Actual360&quot;,
+            &quot;currency&quot;: &quot;CLP&quot;,
+            &quot;fixingDays&quot;: 0,
+            &quot;calendar&quot;: &quot;NullCalendar&quot;,
+            &quot;endOfMonth&quot;: False,
+            &quot;convention&quot;: &quot;Unadjusted&quot;
+        }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkIndex(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the index is valid
+
+    Parameters
+    ----------
+    data: dict
+        The index
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateIndexError
+        If the index is invalid
+
+    Details
+    -------
+    The index should have the following example structure:
+    ```
+    &#34;curveIndex&#34;: {
+                &#34;indexType&#34;: &#34;IborIndex&#34;,
+                &#34;tenor&#34;: &#34;6M&#34;,
+                &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                &#34;currency&#34;: &#34;CLP&#34;,
+                &#34;fixingDays&#34;: 0,
+                &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                &#34;endOfMonth&#34;: False,
+                &#34;convention&#34;: &#34;Unadjusted&#34;
+            }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;indexType&#34;: partial(checkIsInEnum, enum=IndexType.__members__),
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;currency&#34;: checkCurrency,
+        &#34;fixingDays&#34;: partial(checkInstance, type=int),
+        &#34;calendar&#34;: checkCalendar,
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateIndexError(&#39;Invalid index configuration&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkInstance"><code class="name flex">
+<span>def <span class="ident">checkInstance</span></span>(<span>value: <built-in function any>, type: type) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the value is an instance of the type</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>any</code></dt>
+<dd>The value to check</dd>
+<dt><strong><code>type</code></strong> :&ensp;<code>type</code></dt>
+<dd>The type to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the value is not an instance of the type</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkInstance(value: any, type: type) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the value is an instance of the type
+
+    Parameters
+    ----------
+    value: any
+        The value to check
+    type: type
+        The type to check
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the value is not an instance of the type
+    &#39;&#39;&#39;
+
+    if not isinstance(value, type):
+        raise ValueError(f&#39;The value {value} is not an instance of {type}.&#39;)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkIsInEnum"><code class="name flex">
+<span>def <span class="ident">checkIsInEnum</span></span>(<span>value: str, enum: list) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the value is in the enum</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The value to check</dd>
+<dt><strong><code>enum</code></strong> :&ensp;<code>list</code></dt>
+<dd>The enum</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>If the value is not in the enum</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkIsInEnum(value: str, enum: list) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the value is in the enum
+
+    Parameters
+    ----------
+    value: str
+        The value to check
+    enum: list
+        The enum
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ValueError
+        If the value is not in the enum
+    &#39;&#39;&#39;
+    if value not in enum:
+        raise ValueError(f&#39;{value} is not in {enum}&#39;)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkMarketConfig"><code class="name flex">
+<span>def <span class="ident">checkMarketConfig</span></span>(<span>data: dict, helperType: <a title="curveengine.parsing.enums.HelperType" href="enums.html#curveengine.parsing.enums.HelperType">HelperType</a>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the market config is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The market config</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></code></dt>
+<dd>If the market config is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The market config should have the following example structure:</p>
+<pre><code>&quot;marketConfig&quot;: {
+                    &quot;rate&quot;: {
+                        &quot;ticker&quot; : &quot;CLP_CU&quot;,
+                        &quot;value&quot; : 0.01
+                    },
+                    &quot;spread&quot;: {
+                        &quot;ticker&quot; : &quot;CLP_CU&quot;,
+                        &quot;value&quot; : 0.01
+                    },
+                    &quot;fxSpot&quot;: {
+                        &quot;ticker&quot; : &quot;CLP_CU&quot;,
+                        &quot;value&quot; : 0.01
+                    },
+                    &quot;fxPoints&quot;: {
+                        &quot;ticker&quot; : &quot;CLP_CU&quot;,
+                        &quot;value&quot; : 0.01
+                    }
+                }
+</code></pre>
+<p>Where each field has at least a value. The ticker is optional.
+<br>
+Each field is dependent on the helper type. The following table shows the required fields for each helper type:</p>
+<table>
+<thead>
+<tr>
+<th>Helper type</th>
+<th>Required fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deposit</td>
+<td>rate</td>
+</tr>
+<tr>
+<td>Swap</td>
+<td>rate, spread</td>
+</tr>
+<tr>
+<td>FxSwap</td>
+<td>fxSpot, fxPoints</td>
+</tr>
+<tr>
+<td>Xccy</td>
+<td>rate, spread, fxSpot, fxPoints</td>
+</tr>
+<tr>
+<td>TenorBasis</td>
+<td>spread</td>
+</tr>
+<tr>
+<td>XccyBasis</td>
+<td>spread, fxSpot, fxPoints</td>
+</tr>
+<tr>
+<td>OIS</td>
+<td>spread</td>
+</tr>
+<tr>
+<td>Bond</td>
+<td>rate</td>
+</tr>
+</tbody>
+</table></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkMarketConfig(data: dict, helperType: HelperType) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the market config is valid
+
+    Parameters
+    ----------
+    data: dict
+        The market config
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the market config is invalid
+
+    Details
+    -------
+    The market config should have the following example structure:
+    ```
+    &#34;marketConfig&#34;: {
+                        &#34;rate&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        },
+                        &#34;spread&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        },
+                        &#34;fxSpot&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        },
+                        &#34;fxPoints&#34;: {
+                            &#34;ticker&#34; : &#34;CLP_CU&#34;,
+                            &#34;value&#34; : 0.01
+                        }
+                    }
+    ```
+
+    Where each field has at least a value. The ticker is optional.    
+    Each field is dependent on the helper type. The following table shows the required fields for each helper type:
+
+    |Helper type             | Required fields                  |
+    |----------------------- | ---------------------------------|
+    |Deposit                 | rate                             |
+    |Swap                    | rate, spread                     |    
+    |FxSwap                  | fxSpot, fxPoints                 |    
+    |Xccy                    | rate, spread, fxSpot, fxPoints   |
+    |TenorBasis              | spread                           |
+    |XccyBasis               | spread, fxSpot, fxPoints         |
+    |OIS                     | spread                           |
+    |Bond                    | rate                             |
+    &#39;&#39;&#39;
+
+    def checkPrice(data: dict) -&gt; None:
+        if not isinstance(data, dict):
+            raise ConfigurationError(
+                &#39;Invalid price, should be a dictionary&#39;)
+        if &#39;value&#39; not in data:
+            raise ConfigurationError(
+                &#39;Invalid price, missing value&#39;)
+        if not isinstance(data[&#39;value&#39;], float):
+            raise ConfigurationError(
+                &#39;Invalid price, value should be a float&#39;)
+        if &#39;ticker&#39; in data and not isinstance(data[&#39;ticker&#39;], str):
+            raise ConfigurationError(
+                &#39;Invalid price, ticker should be a string&#39;)
+
+    reference = {}
+    if helperType == HelperType.Deposit:
+        reference = {
+            &#34;rate&#34;: checkPrice
+        }
+    elif helperType == HelperType.Swap:
+        reference = {
+            &#34;rate&#34;: checkPrice,
+            &#34;spread&#34;: checkPrice
+        }
+    elif helperType == HelperType.FxSwap:
+        reference = {
+            &#34;fxSpot&#34;: checkPrice,
+            &#34;fxPoints&#34;: checkPrice
+        }
+    elif helperType == HelperType.Xccy:
+        reference = {
+            &#34;rate&#34;: checkPrice,
+            &#34;spread&#34;: checkPrice,
+            &#34;fxSpot&#34;: checkPrice,
+            &#34;fxPoints&#34;: checkPrice
+        }
+    elif helperType == HelperType.TenorBasis:
+        reference = {
+            &#34;spread&#34;: checkPrice
+        }
+    elif helperType == HelperType.XccyBasis:
+        reference = {
+            &#34;spread&#34;: checkPrice,
+            &#34;fxSpot&#34;: checkPrice,
+            &#34;fxPoints&#34;: checkPrice
+        }
+    elif helperType == HelperType.OIS:
+        reference = {
+            &#34;spread&#34;: checkPrice
+        }
+    elif helperType == HelperType.Bond:
+        reference = {
+            &#34;rate&#34;: checkPrice
+        }
+    else:
+        raise ConfigurationError(&#39;Invalid helper type&#39;)
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid market config&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkOISRateHelper"><code class="name flex">
+<span>def <span class="ident">checkOISRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the OIS rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The OIS rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The OIS rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;: {
+                    &quot;tenor&quot;: &quot;1W&quot;,
+                    &quot;dayCounter&quot;: &quot;Actual360&quot;,
+                    &quot;calendar&quot;: &quot;NullCalendar&quot;,
+                    &quot;convention&quot;: &quot;Following&quot;,
+                    &quot;endOfMonth&quot;: True,
+                    &quot;frequency&quot;: &quot;Annual&quot;,
+                    &quot;settlementDays&quot;: 2,
+                    &quot;paymentLag&quot;: 2,
+                    &quot;telescopicValueDates&quot;: True,
+                    &quot;index&quot;: &quot;SOFR&quot;,
+                    &quot;fixedLegFrequency&quot;: &quot;Semiannual&quot;,
+                    &quot;fwdStart&quot;: &quot;0D&quot;
+                }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkOISRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the OIS rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The OIS rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The OIS rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                        &#34;tenor&#34;: &#34;1W&#34;,
+                        &#34;dayCounter&#34;: &#34;Actual360&#34;,
+                        &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                        &#34;convention&#34;: &#34;Following&#34;,
+                        &#34;endOfMonth&#34;: True,
+                        &#34;frequency&#34;: &#34;Annual&#34;,
+                        &#34;settlementDays&#34;: 2,
+                        &#34;paymentLag&#34;: 2,
+                        &#34;telescopicValueDates&#34;: True,
+                        &#34;index&#34;: &#34;SOFR&#34;,
+                        &#34;fixedLegFrequency&#34;: &#34;Semiannual&#34;,
+                        &#34;fwdStart&#34;: &#34;0D&#34;
+                    }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;convention&#34;: checkConvention,
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;frequency&#34;: checkFrequency,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;paymentLag&#34;: partial(checkInstance, type=int),
+        &#34;telescopicValueDates&#34;: partial(checkInstance, type=bool),
+        &#34;index&#34;: partial(checkInstance, type=str),
+        &#34;fixedLegFrequency&#34;: checkFrequency,
+        &#34;fwdStart&#34;: checkTenor
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(&#39;Invalid OIS rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkPiecewiseCurve"><code class="name flex">
+<span>def <span class="ident">checkPiecewiseCurve</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the piecewise curve is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The piecewise curve</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>InvalidCurve</code></dt>
+<dd>If the curve is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The piecewise curve should have the following example structure:</p>
+<pre><code>&quot;example&quot;: {
+        &quot;curveType&quot;: &quot;Piecewise&quot;,
+        &quot;dayCounter&quot;: &quot;Actual360&quot;,
+        &quot;enableExtrapolation&quot;: True,
+        &quot;rateHelpers&quot;: [
+            ...
+        ]
+    }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkPiecewiseCurve(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the piecewise curve is valid
+
+    Parameters
+    ----------
+    data: dict
+        The piecewise curve
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    InvalidCurve
+        If the curve is invalid
+
+    Details
+    -------
+    The piecewise curve should have the following example structure:
+
+    ```
+    &#34;example&#34;: {
+            &#34;curveType&#34;: &#34;Piecewise&#34;,
+            &#34;dayCounter&#34;: &#34;Actual360&#34;,
+            &#34;enableExtrapolation&#34;: True,
+            &#34;rateHelpers&#34;: [
+                ...
+            ]
+        }
+    ```
+    &#39;&#39;&#39;
+    def checkRateHelperList(l: list) -&gt; None:
+        checkInstance(l, type=list)
+        if len(l) == 0:
+            raise ConfigurationError(
+                &#39;Invalid piecewise curve configuration, rateHelpers should not be empty&#39;)
+        for helper in l:
+            checkRateHelper(helper)
+
+    reference = {
+        &#34;curveType&#34;: partial(checkIsInEnum, enum=[r.value for r in CurveType]),
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;enableExtrapolation&#34;: partial(checkInstance, type=bool),
+        &#34;rateHelpers&#34;: checkRateHelperList
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid piecewise curve configuration&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkRateHelper"><code class="name flex">
+<span>def <span class="ident">checkRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The rate helper should have the following example structure:</p>
+<pre><code>&quot;rateHelper&quot;: {
+                    &quot;helperType&quot;: &quot;OIS&quot;,
+                    &quot;helperConfig&quot;: {
+                       ...
+                    },
+                    &quot;marketConfig&quot;: {
+                        ...
+                    }
+                }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The rate helper should have the following example structure:
+    ```
+    &#34;rateHelper&#34;: {
+                        &#34;helperType&#34;: &#34;OIS&#34;,
+                        &#34;helperConfig&#34;: {
+                           ...
+                        },
+                        &#34;marketConfig&#34;: {
+                            ...
+                        }
+                    }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;helperType&#34;: partial(checkIsInEnum, enum=[r.value for r in HelperType]),
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(
+            &#39;Invalid rate helper configuration or helper type&#39;) from exc
+
+    helperType = HelperType[data[&#39;helperType&#39;]]
+
+    reference[&#34;marketConfig&#34;] = partial(
+        checkMarketConfig, helperType=helperType)
+    if helperType == HelperType.Deposit:
+        reference[&#34;helperConfig&#34;] = checkDepositRateHelper
+    elif helperType == HelperType.Swap:
+        reference[&#34;helperConfig&#34;] = checkSwapRateHelper
+    elif helperType == HelperType.FxSwap:
+        reference[&#34;helperConfig&#34;] = checkFxSwapRateHelper
+    elif helperType == HelperType.Xccy:
+        reference[&#34;helperConfig&#34;] = checkCrossCcyFixFloatSwapRateHelper
+    elif helperType == HelperType.TenorBasis:
+        reference[&#34;helperConfig&#34;] = checkTenorBasisSwapRateHelper
+    elif helperType == HelperType.XccyBasis:
+        reference[&#34;helperConfig&#34;] = checkCrossCcyBasisSwapRateHelper
+    elif helperType == HelperType.OIS:
+        reference[&#34;helperConfig&#34;] = checkOISRateHelper
+    elif helperType == HelperType.Bond:
+        reference[&#34;helperConfig&#34;] = checkFixedRateBondRateHelper
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise ConfigurationError(&#39;Invalid rate helper configuration&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">checkSwapRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the swap rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The swap rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The swap rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;: {
+                &quot;tenor&quot;: &quot;2Y&quot;,
+                &quot;dayCounter&quot;: &quot;Thirty360&quot;,
+                &quot;calendar&quot;: &quot;NullCalendar&quot;,
+                &quot;frequency&quot;: &quot;Semiannual&quot;,
+                &quot;settlementDays&quot;: 2,
+                &quot;discountCurve&quot;: &quot;SOFR&quot;,
+                &quot;index&quot;: &quot;LIBOR3M&quot;,
+                &quot;endOfMonth&quot;: False,
+                &quot;convention&quot;: &quot;Unadjusted&quot;,
+                &quot;fixedLegFrequency&quot;: &quot;Semiannual&quot;,
+                &quot;fwdStart&quot;: &quot;0D&quot;
+            }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the swap rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The swap rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The swap rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;tenor&#34;: &#34;2Y&#34;,
+                    &#34;dayCounter&#34;: &#34;Thirty360&#34;,
+                    &#34;calendar&#34;: &#34;NullCalendar&#34;,
+                    &#34;frequency&#34;: &#34;Semiannual&#34;,
+                    &#34;settlementDays&#34;: 2,
+                    &#34;discountCurve&#34;: &#34;SOFR&#34;,
+                    &#34;index&#34;: &#34;LIBOR3M&#34;,
+                    &#34;endOfMonth&#34;: False,
+                    &#34;convention&#34;: &#34;Unadjusted&#34;,
+                    &#34;fixedLegFrequency&#34;: &#34;Semiannual&#34;,
+                    &#34;fwdStart&#34;: &#34;0D&#34;
+                }
+    ```
+    &#39;&#39;&#39;
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;dayCounter&#34;: checkDayCounter,
+        &#34;calendar&#34;: checkCalendar,
+        &#34;frequency&#34;: checkFrequency,
+        &#34;settlementDays&#34;: partial(checkInstance, type=int),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;index&#34;: partial(checkInstance, type=str),
+        &#34;endOfMonth&#34;: partial(checkInstance, type=bool),
+        &#34;convention&#34;: checkConvention,
+        &#34;fixedLegFrequency&#34;: checkFrequency,
+        &#34;fwdStart&#34;: checkTenor
+    }
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(&#39;Invalid swap rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkTenor"><code class="name flex">
+<span>def <span class="ident">checkTenor</span></span>(<span>tenor: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the tenor is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>tenor</code></strong> :&ensp;<code>str</code></dt>
+<dd>The tenor, it can be a number followed by D, W, M or Y</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></code></dt>
+<dd>If the tenor is invalid</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkTenor(tenor: str) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the tenor is valid
+
+    Parameters
+    ----------
+    tenor: str
+        The tenor, it can be a number followed by D, W, M or Y
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    ConfigurationError
+        If the tenor is invalid
+    &#39;&#39;&#39;
+    regex = r&#39;^(\d+[DWMY])+$&#39;
+    if not re.match(regex, tenor):
+        raise ValueError(f&#39;The tenor {tenor} is invalid&#39;)</code></pre>
+</details>
+</dd>
+<dt id="curveengine.parsing.checks.checkTenorBasisSwapRateHelper"><code class="name flex">
+<span>def <span class="ident">checkTenorBasisSwapRateHelper</span></span>(<span>data: dict) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if the tenor basis rate helper is valid</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>dict</code></dt>
+<dd>The tenor basis rate helper</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></dt>
+<dd>If the rate helper is invalid</dd>
+</dl>
+<h2 id="details">Details</h2>
+<p>The tenor basis rate helper should have the following example structure:</p>
+<pre><code>&quot;helperConfig&quot;: {
+                &quot;tenor&quot;: &quot;3M&quot;,
+                &quot;longIndex&quot;: &quot;LIBOR3M&quot;,
+                &quot;shortIndex&quot;: &quot;LIBOR1M&quot;,
+                &quot;discountCurve&quot;: &quot;SOFR&quot;,
+                &quot;spreadOnShort&quot;: True
+            }
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkTenorBasisSwapRateHelper(data: dict) -&gt; None:
+    &#39;&#39;&#39;
+    Check if the tenor basis rate helper is valid
+
+    Parameters
+    ----------
+    data: dict
+        The tenor basis rate helper
+
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    RateHelperConfigurationError
+        If the rate helper is invalid
+
+    Details
+    -------
+    The tenor basis rate helper should have the following example structure:
+    ```
+    &#34;helperConfig&#34;: {
+                    &#34;tenor&#34;: &#34;3M&#34;,
+                    &#34;longIndex&#34;: &#34;LIBOR3M&#34;,
+                    &#34;shortIndex&#34;: &#34;LIBOR1M&#34;,
+                    &#34;discountCurve&#34;: &#34;SOFR&#34;,
+                    &#34;spreadOnShort&#34;: True
+                }
+    ```
+    &#39;&#39;&#39;
+
+    reference = {
+        &#34;tenor&#34;: checkTenor,
+        &#34;longIndex&#34;: partial(checkInstance, type=str),
+        &#34;shortIndex&#34;: partial(checkInstance, type=str),
+        &#34;discountCurve&#34;: partial(checkInstance, type=str),
+        &#34;spreadOnShort&#34;: partial(checkInstance, type=bool)
+    }
+
+    try:
+        checkDictStructure(data, reference)
+    except Exception as exc:
+        raise RateHelperConfigurationError(
+            &#39;Invalid tenor basis rate helper&#39;) from exc</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="curveengine.parsing.checks.ConfigurationError"><code class="flex name class">
+<span>class <span class="ident">ConfigurationError</span></span>
+<span>(</span><span>message)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised when the request is invalid</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConfigurationError(Exception):
+    &#39;&#39;&#39;
+    Exception raised when the request is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="curveengine.parsing.checks.MarketConfigurationError" href="#curveengine.parsing.checks.MarketConfigurationError">MarketConfigurationError</a></li>
+<li><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></li>
+<li><a title="curveengine.parsing.checks.RateIndexError" href="#curveengine.parsing.checks.RateIndexError">RateIndexError</a></li>
+</ul>
+</dd>
+<dt id="curveengine.parsing.checks.MarketConfigurationError"><code class="flex name class">
+<span>class <span class="ident">MarketConfigurationError</span></span>
+<span>(</span><span>message)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised when the market configuration is invalid</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MarketConfigurationError(ConfigurationError):
+    &#39;&#39;&#39;
+    Exception raised when the market configuration is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></li>
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="curveengine.parsing.checks.RateHelperConfigurationError"><code class="flex name class">
+<span>class <span class="ident">RateHelperConfigurationError</span></span>
+<span>(</span><span>message)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised when the rate helper is invalid</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RateHelperConfigurationError(ConfigurationError):
+    &#39;&#39;&#39;
+    Exception raised when the rate helper is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></li>
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="curveengine.parsing.checks.RateIndexError"><code class="flex name class">
+<span>class <span class="ident">RateIndexError</span></span>
+<span>(</span><span>message)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception raised when the index is invalid</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RateIndexError(ConfigurationError):
+    &#39;&#39;&#39;
+    Exception raised when the index is invalid
+    &#39;&#39;&#39;
+
+    def __init__(self, message):
+        self.message = message</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></li>
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="curveengine.parsing" href="index.html">curveengine.parsing</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="curveengine.parsing.checks.checkCalendar" href="#curveengine.parsing.checks.checkCalendar">checkCalendar</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkCompounding" href="#curveengine.parsing.checks.checkCompounding">checkCompounding</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkConfiguration" href="#curveengine.parsing.checks.checkConfiguration">checkConfiguration</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkConvention" href="#curveengine.parsing.checks.checkConvention">checkConvention</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkCrossCcyBasisSwapRateHelper" href="#curveengine.parsing.checks.checkCrossCcyBasisSwapRateHelper">checkCrossCcyBasisSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkCrossCcyFixFloatSwapRateHelper" href="#curveengine.parsing.checks.checkCrossCcyFixFloatSwapRateHelper">checkCrossCcyFixFloatSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkCurrency" href="#curveengine.parsing.checks.checkCurrency">checkCurrency</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkCurve" href="#curveengine.parsing.checks.checkCurve">checkCurve</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkDate" href="#curveengine.parsing.checks.checkDate">checkDate</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkDateGenerationRule" href="#curveengine.parsing.checks.checkDateGenerationRule">checkDateGenerationRule</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkDayCounter" href="#curveengine.parsing.checks.checkDayCounter">checkDayCounter</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkDepositRateHelper" href="#curveengine.parsing.checks.checkDepositRateHelper">checkDepositRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkDictStructure" href="#curveengine.parsing.checks.checkDictStructure">checkDictStructure</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkDiscountCurve" href="#curveengine.parsing.checks.checkDiscountCurve">checkDiscountCurve</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkFixedRateBondRateHelper" href="#curveengine.parsing.checks.checkFixedRateBondRateHelper">checkFixedRateBondRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkFrequency" href="#curveengine.parsing.checks.checkFrequency">checkFrequency</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkFxSwapRateHelper" href="#curveengine.parsing.checks.checkFxSwapRateHelper">checkFxSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkIndex" href="#curveengine.parsing.checks.checkIndex">checkIndex</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkInstance" href="#curveengine.parsing.checks.checkInstance">checkInstance</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkIsInEnum" href="#curveengine.parsing.checks.checkIsInEnum">checkIsInEnum</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkMarketConfig" href="#curveengine.parsing.checks.checkMarketConfig">checkMarketConfig</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkOISRateHelper" href="#curveengine.parsing.checks.checkOISRateHelper">checkOISRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkPiecewiseCurve" href="#curveengine.parsing.checks.checkPiecewiseCurve">checkPiecewiseCurve</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkRateHelper" href="#curveengine.parsing.checks.checkRateHelper">checkRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkSwapRateHelper" href="#curveengine.parsing.checks.checkSwapRateHelper">checkSwapRateHelper</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkTenor" href="#curveengine.parsing.checks.checkTenor">checkTenor</a></code></li>
+<li><code><a title="curveengine.parsing.checks.checkTenorBasisSwapRateHelper" href="#curveengine.parsing.checks.checkTenorBasisSwapRateHelper">checkTenorBasisSwapRateHelper</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="curveengine.parsing.checks.ConfigurationError" href="#curveengine.parsing.checks.ConfigurationError">ConfigurationError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="curveengine.parsing.checks.MarketConfigurationError" href="#curveengine.parsing.checks.MarketConfigurationError">MarketConfigurationError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="curveengine.parsing.checks.RateHelperConfigurationError" href="#curveengine.parsing.checks.RateHelperConfigurationError">RateHelperConfigurationError</a></code></h4>
+</li>
+<li>
+<h4><code><a title="curveengine.parsing.checks.RateIndexError" href="#curveengine.parsing.checks.RateIndexError">RateIndexError</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
