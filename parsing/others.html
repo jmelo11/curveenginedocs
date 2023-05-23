@@ -26,8 +26,8 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from curveengine.parsing.parsers import *
-from curveengine.parsing.enums import *
+<pre><code class="python">from .parsers import *
+from .enums import *
 from collections import deque
 
 
@@ -113,25 +113,16 @@ def getDependencyList(data: dict) -&gt; dict:
     # Possible index related keys
     pi = [&#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;]
 
-    checkDictKeys(data, [&#39;curves&#39;], level=&#39;&#39;)
-
     dependencies = {}
     for curve in data[&#39;curves&#39;]:
-        checkDictKeys(curve, [&#39;curveName&#39;, &#39;curveConfig&#39;], level=&#39;curves&#39;)
-
         curveName = curve[&#39;curveName&#39;]
         if curveName not in dependencies.keys():
             dependencies[curveName] = set()
 
         curveConfig = curve[&#39;curveConfig&#39;]
-        checkDictKeys(curveConfig, [&#39;curveType&#39;,
-                      &#39;rateHelpers&#39;], level=r&#39;{curve}\curves&#39;.format(curve=curveName))
-
         curveType = CurveType(curveConfig[&#39;curveType&#39;])
         if curveType == CurveType.Piecewise:
             for rateHelper in curveConfig[&#39;rateHelpers&#39;]:
-                checkDictKeys(rateHelper, [&#39;helperType&#39;, &#39;helperConfig&#39;],
-                              level=r&#39;{curve}\curves\rateHelpers&#39;.format(curve=curveName))
                 helperConfig = rateHelper[&#39;helperConfig&#39;]
                 for key in pc:
                     if key in helperConfig:
@@ -140,9 +131,6 @@ def getDependencyList(data: dict) -&gt; dict:
                         if key in helperConfig:
                             dependencies[curveName].add(helperConfig[key])
     return dependencies
-
-
-
 
 
 def topologicalSort(dependencies):
@@ -340,25 +328,16 @@ curve depends on.</p></div>
     # Possible index related keys
     pi = [&#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;]
 
-    checkDictKeys(data, [&#39;curves&#39;], level=&#39;&#39;)
-
     dependencies = {}
     for curve in data[&#39;curves&#39;]:
-        checkDictKeys(curve, [&#39;curveName&#39;, &#39;curveConfig&#39;], level=&#39;curves&#39;)
-
         curveName = curve[&#39;curveName&#39;]
         if curveName not in dependencies.keys():
             dependencies[curveName] = set()
 
         curveConfig = curve[&#39;curveConfig&#39;]
-        checkDictKeys(curveConfig, [&#39;curveType&#39;,
-                      &#39;rateHelpers&#39;], level=r&#39;{curve}\curves&#39;.format(curve=curveName))
-
         curveType = CurveType(curveConfig[&#39;curveType&#39;])
         if curveType == CurveType.Piecewise:
             for rateHelper in curveConfig[&#39;rateHelpers&#39;]:
-                checkDictKeys(rateHelper, [&#39;helperType&#39;, &#39;helperConfig&#39;],
-                              level=r&#39;{curve}\curves\rateHelpers&#39;.format(curve=curveName))
                 helperConfig = rateHelper[&#39;helperConfig&#39;]
                 for key in pc:
                     if key in helperConfig:

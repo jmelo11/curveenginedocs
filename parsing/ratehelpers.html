@@ -26,8 +26,8 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from curveengine.parsing.parsers import *
-from curveengine.parsing.others import *
+<pre><code class="python">from .parsers import *
+from .others import *
 
 
 def createOISRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, indexes: dict, *args, **kwargs):
@@ -67,7 +67,7 @@ def createOISRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, in
     fwdStart = helperConfig[&#39;fwdStart&#39;]
     index = indexes[helperConfig[&#39;index&#39;]]
 
-    rate = marketConfig[&#39;rate&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
     discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
 
     rate = ore.QuoteHandle(ore.SimpleQuote(rate))
@@ -84,23 +84,10 @@ def createDepositRateHelper(helperConfig: dict, marketConfig: dict, *args, **kwa
     ----------
     helperConfig : dict
         The configuration for the helper
-        - tenor : str
-            The tenor of the helper
-        - calendar : str
-            The calendar
-        - convention : str
-            The business day convention
-        - settlementDays : int
-            The number of settlement days
-        - endOfMonth : bool
-            Whether the end of month rule is applied
-        - dayCounter : str
-            The day counter
+       
     marketConfig : dict
         The market configuration for the helper
-        - rate : float
-            The rate
-
+       
     Returns
     -------
     ore.DepositRateHelper
@@ -117,7 +104,7 @@ def createDepositRateHelper(helperConfig: dict, marketConfig: dict, *args, **kwa
     endOfMonth = helperConfig[&#39;endOfMonth&#39;]
     dayCounter = helperConfig[&#39;dayCounter&#39;]
 
-    rate = ore.QuoteHandle(ore.SimpleQuote(marketConfig[&#39;rate&#39;]))
+    rate = ore.QuoteHandle(ore.SimpleQuote(marketConfig[&#39;rate&#39;][&#39;value&#39;]))
     helper = ore.DepositRateHelper(rate, tenor, settlementDays, calendar,
                                    convention, endOfMonth, dayCounter)
     return helper
@@ -134,8 +121,6 @@ def createFixedRateBondRateHelper(helperConfig: dict, marketConfig: dict, curves
 
     marketConfig : dict
         The market configuration for the helper
-        - rate : float or ore.InterestRate
-            The rate
 
     curves : dict
         The curves
@@ -178,7 +163,7 @@ def createFixedRateBondRateHelper(helperConfig: dict, marketConfig: dict, curves
         False
     )
 
-    rate = marketConfig[&#39;rate&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
     if isinstance(rate, float):
         rateDayCounter = ore.Actual365Fixed()
         rateCompounding = ore.Compounded
@@ -249,8 +234,8 @@ def createSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict, i
     fwdStart = helperConfig[&#39;fwdStart&#39;]
 
     # QuoteHandle
-    rate = marketConfig[&#39;rate&#39;]
-    spread = marketConfig[&#39;spread&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
     rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
     spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
 
@@ -293,8 +278,8 @@ def createFxSwapRateHelper(helperConfig: dict, marketConfig: dict, curves: dict,
     ----------
     checkFxSwapRateHelper
     &#34;&#34;&#34;
-    fxPoints = marketConfig[&#39;fxPoints&#39;]
-    spotFx = marketConfig[&#39;fxSpot&#39;]
+    fxPoints = marketConfig[&#39;fxPoints&#39;][&#39;value&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;][&#39;value&#39;]
 
     fixingDays = helperConfig[&#39;fixingDays&#39;]
     calendar = helperConfig[&#39;calendar&#39;]
@@ -413,7 +398,7 @@ def createTenorBasisSwapRateHelper(helperConfig: dict, marketConfig: dict, curve
     shortIndex = indexes[helperConfig[&#39;shortIndex&#39;]]
 
     # QuoteHandle
-    spread = marketConfig[&#39;spread&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
     spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
 
     # Discounting curve
@@ -470,9 +455,9 @@ def createCrossCcyFixFloatSwapRateHelper(helperConfig: dict, marketConfig: dict,
     calendar = helperConfig[&#39;calendar&#39;]
 
     # QuoteHandle
-    rate = marketConfig[&#39;rate&#39;]
-    spotFx = marketConfig[&#39;fxSpot&#39;]
-    spread = marketConfig[&#39;spread&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;][&#39;value&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
 
     rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
     spotFxQuote = ore.QuoteHandle(ore.SimpleQuote(spotFx))
@@ -547,7 +532,7 @@ def createCrossCcyBasisSwapRateHelper(helperConfig: dict, marketConfig: dict, cu
     spreadIndex = indexes[helperConfig[&#39;spreadIndex&#39;]]
 
     # QuoteHandle
-    spread = marketConfig[&#39;spread&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
     spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
 
     # CrossCcyBasisSwapHelper
@@ -645,7 +630,7 @@ The spread</dd>
     spreadIndex = indexes[helperConfig[&#39;spreadIndex&#39;]]
 
     # QuoteHandle
-    spread = marketConfig[&#39;spread&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
     spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
 
     # CrossCcyBasisSwapHelper
@@ -727,9 +712,9 @@ The spread</dd>
     calendar = helperConfig[&#39;calendar&#39;]
 
     # QuoteHandle
-    rate = marketConfig[&#39;rate&#39;]
-    spotFx = marketConfig[&#39;fxSpot&#39;]
-    spread = marketConfig[&#39;spread&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;][&#39;value&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
 
     rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
     spotFxQuote = ore.QuoteHandle(ore.SimpleQuote(spotFx))
@@ -769,23 +754,9 @@ The spread</dd>
 <h2 id="parameters">Parameters</h2>
 <dl>
 <dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
-<dd>The configuration for the helper
-- tenor : str
-The tenor of the helper
-- calendar : str
-The calendar
-- convention : str
-The business day convention
-- settlementDays : int
-The number of settlement days
-- endOfMonth : bool
-Whether the end of month rule is applied
-- dayCounter : str
-The day counter</dd>
+<dd>The configuration for the helper</dd>
 <dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
-<dd>The market configuration for the helper
-- rate : float
-The rate</dd>
+<dd>The market configuration for the helper</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
@@ -806,23 +777,10 @@ The rate</dd>
     ----------
     helperConfig : dict
         The configuration for the helper
-        - tenor : str
-            The tenor of the helper
-        - calendar : str
-            The calendar
-        - convention : str
-            The business day convention
-        - settlementDays : int
-            The number of settlement days
-        - endOfMonth : bool
-            Whether the end of month rule is applied
-        - dayCounter : str
-            The day counter
+       
     marketConfig : dict
         The market configuration for the helper
-        - rate : float
-            The rate
-
+       
     Returns
     -------
     ore.DepositRateHelper
@@ -839,7 +797,7 @@ The rate</dd>
     endOfMonth = helperConfig[&#39;endOfMonth&#39;]
     dayCounter = helperConfig[&#39;dayCounter&#39;]
 
-    rate = ore.QuoteHandle(ore.SimpleQuote(marketConfig[&#39;rate&#39;]))
+    rate = ore.QuoteHandle(ore.SimpleQuote(marketConfig[&#39;rate&#39;][&#39;value&#39;]))
     helper = ore.DepositRateHelper(rate, tenor, settlementDays, calendar,
                                    convention, endOfMonth, dayCounter)
     return helper</code></pre>
@@ -855,9 +813,7 @@ The rate</dd>
 <dt><strong><code>helperConfig</code></strong> :&ensp;<code>dict</code></dt>
 <dd>The configuration for the helper</dd>
 <dt><strong><code>marketConfig</code></strong> :&ensp;<code>dict</code></dt>
-<dd>The market configuration for the helper
-- rate : float or ore.InterestRate
-The rate</dd>
+<dd>The market configuration for the helper</dd>
 <dt><strong><code>curves</code></strong> :&ensp;<code>dict</code></dt>
 <dd>The curves</dd>
 <dt><strong><code>indexes</code></strong> :&ensp;<code>dict</code></dt>
@@ -885,8 +841,6 @@ The rate</dd>
 
     marketConfig : dict
         The market configuration for the helper
-        - rate : float or ore.InterestRate
-            The rate
 
     curves : dict
         The curves
@@ -929,7 +883,7 @@ The rate</dd>
         False
     )
 
-    rate = marketConfig[&#39;rate&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
     if isinstance(rate, float):
         rateDayCounter = ore.Actual365Fixed()
         rateCompounding = ore.Compounded
@@ -1019,8 +973,8 @@ The rate</dd>
     ----------
     checkFxSwapRateHelper
     &#34;&#34;&#34;
-    fxPoints = marketConfig[&#39;fxPoints&#39;]
-    spotFx = marketConfig[&#39;fxSpot&#39;]
+    fxPoints = marketConfig[&#39;fxPoints&#39;][&#39;value&#39;]
+    spotFx = marketConfig[&#39;fxSpot&#39;][&#39;value&#39;]
 
     fixingDays = helperConfig[&#39;fixingDays&#39;]
     calendar = helperConfig[&#39;calendar&#39;]
@@ -1123,7 +1077,7 @@ The rate</dd>
     fwdStart = helperConfig[&#39;fwdStart&#39;]
     index = indexes[helperConfig[&#39;index&#39;]]
 
-    rate = marketConfig[&#39;rate&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
     discountCurve = curves[helperConfig[&#39;discountCurve&#39;]]
 
     rate = ore.QuoteHandle(ore.SimpleQuote(rate))
@@ -1269,8 +1223,8 @@ The rate</dd>
     fwdStart = helperConfig[&#39;fwdStart&#39;]
 
     # QuoteHandle
-    rate = marketConfig[&#39;rate&#39;]
-    spread = marketConfig[&#39;spread&#39;]
+    rate = marketConfig[&#39;rate&#39;][&#39;value&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
     rateQuote = ore.QuoteHandle(ore.SimpleQuote(rate))
     spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
 
@@ -1348,7 +1302,7 @@ The rate</dd>
     shortIndex = indexes[helperConfig[&#39;shortIndex&#39;]]
 
     # QuoteHandle
-    spread = marketConfig[&#39;spread&#39;]
+    spread = marketConfig[&#39;spread&#39;][&#39;value&#39;]
     spreadQuote = ore.QuoteHandle(ore.SimpleQuote(spread))
 
     # Discounting curve

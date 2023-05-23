@@ -28,7 +28,7 @@
 </summary>
 <pre><code class="python">import re
 from functools import partial
-from curveengine.parsing.enums import *
+from .enums import *
 
 &#39;&#39;&#39;
 Example of a basic structure of the curve request:
@@ -898,7 +898,7 @@ def checkMarketConfig(data: dict, helperType: HelperType) -&gt; None:
     |Deposit                 | rate                             |
     |Swap                    | rate, spread                     |    
     |FxSwap                  | fxSpot, fxPoints                 |    
-    |Xccy                    | rate, spread, fxSpot, fxPoints   |
+    |Xccy                    | rate, spread, fxSpot             |
     |TenorBasis              | spread                           |
     |XccyBasis               | spread, fxSpot, fxPoints         |
     |OIS                     | spread                           |
@@ -912,9 +912,9 @@ def checkMarketConfig(data: dict, helperType: HelperType) -&gt; None:
         if &#39;value&#39; not in data:
             raise ConfigurationError(
                 &#39;Invalid price, missing value&#39;)
-        if not isinstance(data[&#39;value&#39;], float):
+        if not isinstance(data[&#39;value&#39;], float) and not isinstance(data[&#39;value&#39;], int):
             raise ConfigurationError(
-                &#39;Invalid price, value should be a float&#39;)
+                &#39;Invalid price, value should be a float or int&#39;)
         if &#39;ticker&#39; in data and not isinstance(data[&#39;ticker&#39;], str):
             raise ConfigurationError(
                 &#39;Invalid price, ticker should be a string&#39;)
@@ -938,8 +938,7 @@ def checkMarketConfig(data: dict, helperType: HelperType) -&gt; None:
         reference = {
             &#34;rate&#34;: checkPrice,
             &#34;spread&#34;: checkPrice,
-            &#34;fxSpot&#34;: checkPrice,
-            &#34;fxPoints&#34;: checkPrice
+            &#34;fxSpot&#34;: checkPrice,            
         }
     elif helperType == HelperType.TenorBasis:
         reference = {
@@ -969,7 +968,7 @@ def checkMarketConfig(data: dict, helperType: HelperType) -&gt; None:
             &#39;Invalid market config&#39;) from exc
 
 
-def checkRateHelper(data: dict) -&gt; None:
+def checkRateHelper(data: dict, pos: int) -&gt; None:
     &#39;&#39;&#39;
     Check if the rate helper is valid
 
@@ -1010,7 +1009,7 @@ def checkRateHelper(data: dict) -&gt; None:
         checkDictStructure(data, reference)
     except Exception as exc:
         raise ConfigurationError(
-            &#39;Invalid rate helper configuration or helper type&#39;) from exc
+            &#39;Invalid rate helper configuration or helper type at pos {}&#39;.format(pos)) from exc
 
     helperType = HelperType[data[&#39;helperType&#39;]]
 
@@ -1036,7 +1035,9 @@ def checkRateHelper(data: dict) -&gt; None:
     try:
         checkDictStructure(data, reference)
     except Exception as exc:
-        raise ConfigurationError(&#39;Invalid rate helper configuration&#39;) from exc
+        raise RateHelperConfigurationError(
+            &#39;Invalid rate helper {} configuration at pos {}&#39;.format(helperType, pos)) from exc
+    
 
 
 ## Index checks ##
@@ -1134,8 +1135,8 @@ def checkPiecewiseCurve(data: dict) -&gt; None:
         if len(l) == 0:
             raise ConfigurationError(
                 &#39;Invalid piecewise curve configuration, rateHelpers should not be empty&#39;)
-        for helper in l:
-            checkRateHelper(helper)
+        for pos, helper in enumerate(l):
+            checkRateHelper(helper, pos)
 
     reference = {
         &#34;curveType&#34;: partial(checkIsInEnum, enum=[r.value for r in CurveType]),
@@ -1213,7 +1214,7 @@ def checkDiscountCurve(data: dict) -&gt; None:
             &#39;Invalid discount curve configuration&#39;) from exc
 
 
-def checkCurve(data: dict) -&gt; None:
+def checkCurve(data: dict, pos: int) -&gt; None:
     &#39;&#39;&#39;
     Check if the curve is valid
 
@@ -1269,9 +1270,11 @@ def checkCurve(data: dict) -&gt; None:
 
     try:
         checkDictStructure(data, reference)
-    except Exception as exc:
+    except ConfigurationError as exc:
         raise ConfigurationError(
-            &#39;Invalid curve configuration&#39;) from exc
+            &#39;Invalid curve configuration for {} curve&#39;.format(data[&#39;curveName&#39;])) from exc
+    except Exception as exc:
+        raise ConfigurationError(&#39;Invalid curve configuration at pos {}&#39;.format(pos)) from exc
 
 
 def checkConfiguration(data: dict) -&gt; None:
@@ -1319,19 +1322,13 @@ def checkConfiguration(data: dict) -&gt; None:
     }
     ```
     &#39;&#39;&#39;
-
     def checkCurveList(l: list) -&gt; None:
-        reference = {
-            &#34;curveName&#34;: partial(checkInstance, type=str),
-            &#34;curveConfig&#34;: checkCurve,
-            &#34;curveIndex&#34;: checkIndex
-        }
         checkInstance(l, type=list)
         if len(l) == 0:
             raise ConfigurationError(
                 &#39;Invalid configuration, curves should not be empty&#39;)
-        for curve in l:
-            checkDictStructure(curve, reference)
+        for pos, curve in enumerate(l):
+            checkCurve(curve, pos)
 
     reference = {
         &#34;refDate&#34;: checkDate,
@@ -1549,19 +1546,13 @@ Compounding</p></div>
     }
     ```
     &#39;&#39;&#39;
-
     def checkCurveList(l: list) -&gt; None:
-        reference = {
-            &#34;curveName&#34;: partial(checkInstance, type=str),
-            &#34;curveConfig&#34;: checkCurve,
-            &#34;curveIndex&#34;: checkIndex
-        }
         checkInstance(l, type=list)
         if len(l) == 0:
             raise ConfigurationError(
                 &#39;Invalid configuration, curves should not be empty&#39;)
-        for curve in l:
-            checkDictStructure(curve, reference)
+        for pos, curve in enumerate(l):
+            checkCurve(curve, pos)
 
     reference = {
         &#34;refDate&#34;: checkDate,
@@ -1871,7 +1862,7 @@ Currency</p></div>
 </details>
 </dd>
 <dt id="curveengine.parsing.checks.checkCurve"><code class="name flex">
-<span>def <span class="ident">checkCurve</span></span>(<span>data: dict) ‑> None</span>
+<span>def <span class="ident">checkCurve</span></span>(<span>data: dict, pos: int) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Check if the curve is valid</p>
@@ -1908,7 +1899,7 @@ Currency</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def checkCurve(data: dict) -&gt; None:
+<pre><code class="python">def checkCurve(data: dict, pos: int) -&gt; None:
     &#39;&#39;&#39;
     Check if the curve is valid
 
@@ -1964,9 +1955,11 @@ Currency</p></div>
 
     try:
         checkDictStructure(data, reference)
-    except Exception as exc:
+    except ConfigurationError as exc:
         raise ConfigurationError(
-            &#39;Invalid curve configuration&#39;) from exc</code></pre>
+            &#39;Invalid curve configuration for {} curve&#39;.format(data[&#39;curveName&#39;])) from exc
+    except Exception as exc:
+        raise ConfigurationError(&#39;Invalid curve configuration at pos {}&#39;.format(pos)) from exc</code></pre>
 </details>
 </dd>
 <dt id="curveengine.parsing.checks.checkDate"><code class="name flex">
@@ -2824,7 +2817,7 @@ Each field is dependent on the helper type. The following table shows the requir
 </tr>
 <tr>
 <td>Xccy</td>
-<td>rate, spread, fxSpot, fxPoints</td>
+<td>rate, spread, fxSpot</td>
 </tr>
 <tr>
 <td>TenorBasis</td>
@@ -2898,7 +2891,7 @@ Each field is dependent on the helper type. The following table shows the requir
     |Deposit                 | rate                             |
     |Swap                    | rate, spread                     |    
     |FxSwap                  | fxSpot, fxPoints                 |    
-    |Xccy                    | rate, spread, fxSpot, fxPoints   |
+    |Xccy                    | rate, spread, fxSpot             |
     |TenorBasis              | spread                           |
     |XccyBasis               | spread, fxSpot, fxPoints         |
     |OIS                     | spread                           |
@@ -2912,9 +2905,9 @@ Each field is dependent on the helper type. The following table shows the requir
         if &#39;value&#39; not in data:
             raise ConfigurationError(
                 &#39;Invalid price, missing value&#39;)
-        if not isinstance(data[&#39;value&#39;], float):
+        if not isinstance(data[&#39;value&#39;], float) and not isinstance(data[&#39;value&#39;], int):
             raise ConfigurationError(
-                &#39;Invalid price, value should be a float&#39;)
+                &#39;Invalid price, value should be a float or int&#39;)
         if &#39;ticker&#39; in data and not isinstance(data[&#39;ticker&#39;], str):
             raise ConfigurationError(
                 &#39;Invalid price, ticker should be a string&#39;)
@@ -2938,8 +2931,7 @@ Each field is dependent on the helper type. The following table shows the requir
         reference = {
             &#34;rate&#34;: checkPrice,
             &#34;spread&#34;: checkPrice,
-            &#34;fxSpot&#34;: checkPrice,
-            &#34;fxPoints&#34;: checkPrice
+            &#34;fxSpot&#34;: checkPrice,            
         }
     elif helperType == HelperType.TenorBasis:
         reference = {
@@ -3142,8 +3134,8 @@ Each field is dependent on the helper type. The following table shows the requir
         if len(l) == 0:
             raise ConfigurationError(
                 &#39;Invalid piecewise curve configuration, rateHelpers should not be empty&#39;)
-        for helper in l:
-            checkRateHelper(helper)
+        for pos, helper in enumerate(l):
+            checkRateHelper(helper, pos)
 
     reference = {
         &#34;curveType&#34;: partial(checkIsInEnum, enum=[r.value for r in CurveType]),
@@ -3160,7 +3152,7 @@ Each field is dependent on the helper type. The following table shows the requir
 </details>
 </dd>
 <dt id="curveengine.parsing.checks.checkRateHelper"><code class="name flex">
-<span>def <span class="ident">checkRateHelper</span></span>(<span>data: dict) ‑> None</span>
+<span>def <span class="ident">checkRateHelper</span></span>(<span>data: dict, pos: int) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Check if the rate helper is valid</p>
@@ -3195,7 +3187,7 @@ Each field is dependent on the helper type. The following table shows the requir
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def checkRateHelper(data: dict) -&gt; None:
+<pre><code class="python">def checkRateHelper(data: dict, pos: int) -&gt; None:
     &#39;&#39;&#39;
     Check if the rate helper is valid
 
@@ -3236,7 +3228,7 @@ Each field is dependent on the helper type. The following table shows the requir
         checkDictStructure(data, reference)
     except Exception as exc:
         raise ConfigurationError(
-            &#39;Invalid rate helper configuration or helper type&#39;) from exc
+            &#39;Invalid rate helper configuration or helper type at pos {}&#39;.format(pos)) from exc
 
     helperType = HelperType[data[&#39;helperType&#39;]]
 
@@ -3262,7 +3254,8 @@ Each field is dependent on the helper type. The following table shows the requir
     try:
         checkDictStructure(data, reference)
     except Exception as exc:
-        raise ConfigurationError(&#39;Invalid rate helper configuration&#39;) from exc</code></pre>
+        raise RateHelperConfigurationError(
+            &#39;Invalid rate helper {} configuration at pos {}&#39;.format(helperType, pos)) from exc</code></pre>
 </details>
 </dd>
 <dt id="curveengine.parsing.checks.checkSwapRateHelper"><code class="name flex">
