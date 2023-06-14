@@ -74,19 +74,7 @@ def parse(**kwargs):
 
         elif key in [&#39;tenor&#39;, &#39;fwdStart&#39;, &#39;shortPayTenor&#39;]:
             results[key] = parsePeriod(value)
-
-        elif key in [&#39;endOfMonth&#39;, &#39;telescopicValueDates&#39;, &#39;spreadOnShortIndex&#39;, &#39;baseCurrencyAsCollateral&#39;, &#39;enableExtrapolation&#39;]:
-            results[key] = value
-
-        elif key in [&#39;settlementDays&#39;, &#39;paymentLag&#39;, &#39;fixingDays&#39;, &#39;year&#39;]:
-            results[key] = value
-
-        elif key in [&#39;discountCurve&#39;, &#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;, &#39;curveName&#39;]:
-            results[key] = value
-
-        elif key in [&#39;couponRate&#39;]:
-            results[key] = value
-
+            
         elif key == &#39;month&#39;:
             results[key] = parseMonth(value)
 
@@ -300,7 +288,8 @@ def parseDate(date: str) -&gt; ore.Date:
     if date == &#39;today&#39;:
         return ore.Date.todaysDate()
     else:
-        return ore.DateParser.parseFormatted(date, &#39;%Y-%m-%d&#39;)
+        return ore.DateParser.parseISO(date[0:10])
+
 
 
 def parsePeriod(period: str) -&gt; ore.Period:
@@ -317,6 +306,7 @@ def parsePeriod(period: str) -&gt; ore.Period:
     ore.Period
         The ORE period
     &#34;&#34;&#34;
+    
     tenor = ore.PeriodParser.parse(period)
     return tenor
 
@@ -444,19 +434,7 @@ def parseMonth(month: str):
 
         elif key in [&#39;tenor&#39;, &#39;fwdStart&#39;, &#39;shortPayTenor&#39;]:
             results[key] = parsePeriod(value)
-
-        elif key in [&#39;endOfMonth&#39;, &#39;telescopicValueDates&#39;, &#39;spreadOnShortIndex&#39;, &#39;baseCurrencyAsCollateral&#39;, &#39;enableExtrapolation&#39;]:
-            results[key] = value
-
-        elif key in [&#39;settlementDays&#39;, &#39;paymentLag&#39;, &#39;fixingDays&#39;, &#39;year&#39;]:
-            results[key] = value
-
-        elif key in [&#39;discountCurve&#39;, &#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;, &#39;curveName&#39;]:
-            results[key] = value
-
-        elif key in [&#39;couponRate&#39;]:
-            results[key] = value
-
+            
         elif key == &#39;month&#39;:
             results[key] = parseMonth(value)
 
@@ -666,7 +644,7 @@ def parseMonth(month: str):
     if date == &#39;today&#39;:
         return ore.Date.todaysDate()
     else:
-        return ore.DateParser.parseFormatted(date, &#39;%Y-%m-%d&#39;)</code></pre>
+        return ore.DateParser.parseISO(date[0:10])</code></pre>
 </details>
 </dd>
 <dt id="curveengine.parsing.parsers.parseDateGenerationRule"><code class="name flex">
@@ -914,6 +892,7 @@ def parseMonth(month: str):
     ore.Period
         The ORE period
     &#34;&#34;&#34;
+    
     tenor = ore.PeriodParser.parse(period)
     return tenor</code></pre>
 </details>

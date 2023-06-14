@@ -108,10 +108,10 @@ def getDependencyList(data: dict) -&gt; dict:
     curve names as value. The set contains the names of the curves that the
     curve depends on.
     &#34;&#34;&#34;
-    # Possible curve related keys
-    pc = [&#39;discountCurve&#39;, &#39;collateralCurve&#39;]
+    # Possible curve-related keys
+    pc = [&#39;discountCurve&#39;, &#39;collateralCurve&#39;, &#39;flatDiscountCurve&#39;, &#39;spreadDiscountCurve&#39;]
     # Possible index related keys
-    pi = [&#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;]
+    pi = [&#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;, &#39;flatIndex&#39;, &#39;spreadIndex&#39;]
 
     dependencies = {}
     for curve in data[&#39;curves&#39;]:
@@ -323,10 +323,10 @@ curve depends on.</p></div>
     curve names as value. The set contains the names of the curves that the
     curve depends on.
     &#34;&#34;&#34;
-    # Possible curve related keys
-    pc = [&#39;discountCurve&#39;, &#39;collateralCurve&#39;]
+    # Possible curve-related keys
+    pc = [&#39;discountCurve&#39;, &#39;collateralCurve&#39;, &#39;flatDiscountCurve&#39;, &#39;spreadDiscountCurve&#39;]
     # Possible index related keys
-    pi = [&#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;]
+    pi = [&#39;index&#39;, &#39;shortIndex&#39;, &#39;longIndex&#39;, &#39;flatIndex&#39;, &#39;spreadIndex&#39;]
 
     dependencies = {}
     for curve in data[&#39;curves&#39;]:
